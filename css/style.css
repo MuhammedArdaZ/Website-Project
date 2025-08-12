@@ -1,3 +1,15 @@
-#top-bar{
+#top-bar {
     background-color: black;
+}
+
+.main-page-news-li {
+    list-style-type: none;
+}
+
+.upload-new-page-li{
+    list-style-type: none;
+}
+
+.main-page-news-content {
+    font-size: larger;
 }

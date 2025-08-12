@@ -1,14 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 #search-bar{
     margin-left: 25%;
     width: 40%;
     vertical-align: 40px;
 }
 
-.main-page-center-list{
-    list-style-type: none;
-}
-
-.main-login-register{
+.main-page-login-register-upload{
     justify-content: right; 
     align-items: end; 
     display: flex;
@@ -23,3 +24,39 @@
     flex-direction: column;
 }
 
+.main-page-news-title{
+    vertical-align: top;
+    margin: auto;
+}
+
+.main-page-news-content{
+    vertical-align: top;
+    margin: auto;
+    font-size: larger;
+    margin-bottom: 12%;
+}
+
+.main-page-news-div{
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    flex: content;
+    display: flex;
+}
+
+.upload-new-page-div{
+    margin: auto;
+    justify-content: center;
+    display: flex;
+}
+
+.upload-new-page-div li{
+    margin-top: 10px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#upload-new-page-content{
+    height: 20%;
+}
