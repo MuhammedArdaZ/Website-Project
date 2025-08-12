@@ -1,6 +1,5 @@
 #main-logo{
-    margin-left: 10px;
-    border: 10px;
+    margin-left: 1%;
     background-color: black;
     color: white;
     outline: none;
@@ -8,11 +7,16 @@
     height: 100px;
 }
 
-.main-image{
-    border: 3px;
+.main-page-main-image{
     width: 300px;
     margin: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    flex: content;
+    display: flex;
 }
 
+.new-page-main-image{
+    width: 300px;
+    margin: auto;
+    flex: content;
+    display: flex;
+}
