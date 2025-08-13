@@ -15,7 +15,13 @@ body {
     display: flex;
 }
 
-.register-login{
+.new-page-login-register-upload{
+    justify-content: right; 
+    align-items: end; 
+    display: flex;
+}
+
+.register-login-upload{
     margin-top: 10px;
     width: auto;
     justify-content: center;
@@ -44,19 +50,52 @@ body {
     display: flex;
 }
 
-.upload-new-page-div{
+.new-page-news-div{
     margin: auto;
     justify-content: center;
+    align-items: center;
+    flex: content;
     display: flex;
 }
 
-.upload-new-page-div li{
+.new-page-news-title{
+    vertical-align: top;
+    margin: auto;
+}
+
+.new-page-news-content{
+    vertical-align: top;
+    margin: auto;
+    font-size: larger;
+    margin-bottom: 12%;
+}
+
+.upload-new-page-div{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.upload-new-page-li {
     margin-top: 10px;
     width: auto;
+    justify-content: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
 }
 
 #upload-new-page-content{
     height: 20%;
+}
+
+li{
+    gap: 10px;
+    flex-direction: column;
+    display: flex;
+}
+
+ul{
+    padding: 0px;
+    margin: 0px;
 }

@@ -1,26 +1,32 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta>
-    <link rel="stylesheet" href="./css/main.css">
+    <title>HasHaber/post-news</title>
+    <link rel="stylesheet" href="./CSS/main.css">
+</head>
 
 <body>
     <div id="top-bar">
         <a href="main-page.html">
             <img src="Images/logo-revert.png" alt="HasHaber" id="main-logo">
         </a>
-        <input text="text" placeholder="Search a new..." id="search-bar">
     </div>
-    <div class="upload-new-page-div">
-        <ul>
-            <li class="upload-new-page-li">
-                Choose Images To Upload:
-                <input type="file" id="Upload-New">
-                <br>
-                <input type="text" placeholder="---Title---" id="">
-                <input type="text" placeholder="---Content---" id="upload-new-page-content">
-            </li>
-        </ul>
-    </div>
+    <form action="" method="get">
+        <div class="upload-page-div">
+            <ul>
+                <li class="upload-new-page-li">
+                    <input id="upload-new-page-link" type="url" placeholder="Image URL: 'https://...'" size="30px"
+                        pattern="https://.*" required>
+                    <input id="upload-new-page-title" type="text" id="" placeholder="...Title...">
+                    <textarea id="upload-new-page-content" placeholder="...Content..." cols="100" rows="20"
+                        required></textarea>
+                </li>
+            </ul>
+        </div>
+        <div class="register-login-upload">
+            <input type="submit" value="Upload">
+        </div>
+    </form>
 </body>
-</head>

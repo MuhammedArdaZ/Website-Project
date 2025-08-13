@@ -13,3 +13,15 @@
 .main-page-news-content {
     font-size: larger;
 }
+
+a{
+    color: transparent;
+}
+
+li{
+    list-style-type: none;
+}
+
+#upload-new-page-title{
+    font-size: x-large;
+}
