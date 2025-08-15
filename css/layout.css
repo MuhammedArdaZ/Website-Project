@@ -1,12 +1,19 @@
+#top-bar{
+    align-items: center;
+    display: flex;
+}
+
 body {
     margin: 0;
     padding: 0;
 }
 
 #search-bar{
-    margin-left: 25%;
-    width: 40%;
-    vertical-align: 40px;
+    margin-left: 10%;
+    width: 50%;
+    max-height: 20px;
+    align-self: anchor-center;
+    flex: none;
 }
 
 .main-page-login-register-upload{
@@ -21,13 +28,12 @@ body {
     display: flex;
 }
 
-.upload-new-page-li {
-    margin-top: 10px;
-    width: auto;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+#main-page-news-li{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0px;
+    margin: 0px;
+    gap: 20px;
 }
 
 .register-login-upload{
