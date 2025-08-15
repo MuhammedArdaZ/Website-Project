@@ -1,5 +1,25 @@
+body{
+    background-color: whitesmoke;
+}
+
 #top-bar {
     background-color: black;
+}
+
+#search-bar{
+    background-color: whitesmoke;
+}
+
+#date-span{
+    color: #c9c9c9;
+    font-size: large;
+    font-weight: 600;
+}
+
+#clock-span{
+    color: #c9c9c9;
+    font-size: large;
+    font-weight: 600;
 }
 
 .main-page-news-li {
@@ -12,6 +32,18 @@
 
 .main-page-news-content {
     font-size: larger;
+}
+
+#upload-new-page-link{
+    font-size: larger;
+}
+
+#upload-new-page-url-button{
+    font-size: larger;
+}
+
+#upload-new-page-title{
+    font-size: x-large;
 }
 
 a {

@@ -8,12 +8,33 @@ body {
     padding: 0;
 }
 
+p{
+    overflow-wrap: break-word;
+}
+
 #search-bar{
     margin-left: 10%;
     width: 50%;
     max-height: 20px;
     align-self: anchor-center;
     flex: none;
+}
+
+#date-clock-div{
+    width: fit-content;
+    height: 100px;
+    justify-content: space-evenly;
+    flex-direction: column;
+    display: flex;
+    margin: 20px;
+}
+
+#date-span{
+    width: fit-content;
+}
+
+#clock-span{
+    width: fit-content;
 }
 
 .main-page-login-register-upload{
@@ -36,20 +57,6 @@ body {
     gap: 20px;
 }
 
-.register-login-upload{
-    margin-top: 10px;
-    width: auto;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.main-page-news-title{
-    vertical-align: top;
-    margin: auto;
-}
-
 .main-page-news-content{
     vertical-align: top;
     margin: auto;
@@ -63,6 +70,20 @@ body {
     align-items: center;
     flex: content;
     display: flex;
+}
+
+.register-login-upload{
+    margin-top: 10px;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-page-news-title{
+    vertical-align: top;
+    margin: auto;
 }
 
 .new-page-news-div{
@@ -85,6 +106,19 @@ body {
     margin-bottom: 12%;
 }
 
+#new-page-comment-section{
+    width: 100%;
+    resize: none;
+    border: none;
+    background-color: whitesmoke;
+    height: fit-content;
+}
+
+#new-page-comment-section-div{
+    width: 50%;
+    margin-left: 1%;
+}
+
 .upload-new-page-div{
     justify-content: center;
     align-items: center;
@@ -100,20 +134,8 @@ body {
     flex-direction: column;
 }
 
-#upload-new-page-link{
-    font-size: larger;
-}
-
-#upload-new-page-url-button{
-    font-size: larger;
-}
-
-#upload-new-page-title{
-    font-size: x-large;
-}
-
 #upload-new-page-content{
-    resize: vertical;
+    resize: none;
     width: 40%;
     height: 300px;
 }

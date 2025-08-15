@@ -9,6 +9,37 @@
     <div id="top-bar"><a href="main-page.html">
             <img src="Images/logo-revert.png" alt="HasHaber" id="main-logo"></a> <input text="text"
             placeholder="Search a new..." id="search-bar">
+        <a href="" id="search-bar-search-button">&#x1F50D</a>
+        <a href="" id="dark-light-theme-button">&#x1F315</a>
+
+        <div id="date-clock-div">
+            <span id="date-span"></span>
+            <span id="clock-span"></span>
+        </div>
+
+        <script>
+            var clockSpan = document.getElementById("clock-span");
+            var dateSpan = document.getElementById("date-span")
+            date_time()
+
+            function date_time() {
+                var date = new Date();
+                var day = date.getDay();
+                var month = date.getMonth();
+                var year = date.getFullYear()
+                var second = date.getSeconds();
+                var minute = date.getMinutes();
+                var hour = date.getHours();
+
+                dateSpan.textContent =
+                    ("0" + day).substr(-2) + "-" + ("0" + month).substr(-2) + "-" + ("0" + year).substr(-2);
+                clockSpan.textContent =
+                    ("0" + hour).substr(-2) + ":" + ("0" + minute).substr(-2) + ":" + ("0" + second).substr(-2);
+            }
+            setInterval(date_time, 1000);
+        </script>
+
+
     </div>
     <div class="new-page-login-register-upload">
         <a href="login-page.html"><input type="button" value="Login"></a>
@@ -22,6 +53,22 @@
                     <img src="Images/logo-revert.png" alt="Error" class="new-page-main-image">
                     <h2 class="new-page-news-title">Title</h2>
                     <p class="new-page-news-content">HasHaber Is The Best</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div id="new-page-comment-section-div">
+        <p>Comments</p>
+        <textarea id="new-page-comment-section" placeholder="Write Comment Here..." rows="4"></textarea>
+        <ul>
+            <li id="new-page-comment-section-li">
+                <div>
+                    <div>
+                        <img id="comment-avatar-image" src="Images/GuessAvatar.png" alt="profile">
+                        <p>Username</p>
+                    </div>
+                    <p>Comment Sample</p>
                 </div>
             </li>
         </ul>
