@@ -6,7 +6,7 @@
     list-style-type: none;
 }
 
-.upload-new-page-li{
+.upload-new-page-li {
     list-style-type: none;
 }
 
@@ -14,14 +14,145 @@
     font-size: larger;
 }
 
-a{
+a {
     color: transparent;
 }
 
-li{
+li {
     list-style-type: none;
 }
 
-#upload-new-page-title{
-    font-size: x-large;
+.register-login-upload-button {
+    width: 100px;
+    background-color: black;
+    border: none;
+    outline: none;
+    height: 38px;
+    border-radius: 38px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0px 0px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#name {
+    width: 200px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 49px;
+    color: #c9c9c9;
+    font-weight: 600;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+}
+
+#surname {
+    width: 200px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 49px;
+    color: #c9c9c9;
+    font-weight: 600;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+}
+
+#email {
+    width: 200px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 49px;
+    color: #c9c9c9;
+    font-weight: 600;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+}
+
+#password {
+    width: 200px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 49px;
+    color: #c9c9c9;
+    font-weight: 600;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+}
+
+#upload-new-page-url-button {
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: black;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+#upload-new-page-title {
+    width: 300px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    height: 56px;
+    border-radius: 10px;
+    color: #c9c9c9;
+    font-weight: 600;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+}
+
+#upload-new-page-content {
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    color: #c9c9c9;
+    font-weight: 350;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+}
+
+#upload-new-page-link {
+    width: 450px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    height: 35px;
+    border-radius: 10px;
+    color: #c9c9c9;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    grid-template-columns: 15% 85%;
+    position: relative;
 }

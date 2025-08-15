@@ -21,6 +21,15 @@ body {
     display: flex;
 }
 
+.upload-new-page-li {
+    margin-top: 10px;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 .register-login-upload{
     margin-top: 10px;
     width: auto;
@@ -85,9 +94,24 @@ body {
     flex-direction: column;
 }
 
-#upload-new-page-content{
-    height: 20%;
+#upload-new-page-link{
+    font-size: larger;
 }
+
+#upload-new-page-url-button{
+    font-size: larger;
+}
+
+#upload-new-page-title{
+    font-size: x-large;
+}
+
+#upload-new-page-content{
+    resize: vertical;
+    width: 40%;
+    height: 300px;
+}
+
 
 li{
     gap: 10px;

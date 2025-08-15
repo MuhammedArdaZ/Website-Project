@@ -17,8 +17,12 @@
         <div class="upload-page-div">
             <ul>
                 <li class="upload-new-page-li">
-                    <input id="upload-new-page-link" type="url" placeholder="Image URL: 'https://...'" size="30px"
-                        pattern="https://.*" required>
+                    <div>
+                        <input id="upload-new-page-link" type="url" placeholder="Image URL: 'https://...'" size="30px"
+                            pattern="https://.*" required>
+                        <input type="button" id="upload-new-page-url-button" value="Select Image">
+                    </div>
+
                     <input id="upload-new-page-title" type="text" id="" placeholder="...Title...">
                     <textarea id="upload-new-page-content" placeholder="...Content..." cols="100" rows="20"
                         required></textarea>
@@ -26,7 +30,7 @@
             </ul>
         </div>
         <div class="register-login-upload">
-            <input type="submit" value="Upload">
+            <input class="register-login-upload-button" type="submit" value="Upload">
         </div>
     </form>
 </body>
