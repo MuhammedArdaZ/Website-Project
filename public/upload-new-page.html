@@ -4,13 +4,13 @@
 <head>
     <meta>
     <title>HasHaber/post-news</title>
-    <link rel="stylesheet" href="./CSS/main.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
     <div id="top-bar">
         <a href="main-page.html">
-            <img src="Images/logo-revert.png" alt="HasHaber" id="main-logo">
+            <img src="logo-revert.png" alt="HasHaber" id="main-logo">
         </a>
     <a href="" id="dark-light-theme-button">&#x1F315</a>
 
@@ -26,36 +26,33 @@
 
             function date_time() {
                 var date = new Date();
-                var day = date.getDay();
-                var month = date.getMonth();
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
                 var year = date.getFullYear()
                 var second = date.getSeconds();
                 var minute = date.getMinutes();
                 var hour = date.getHours();
 
                 dateSpan.textContent =
-                    ("0" + day).substr(-2) + "-" + ("0" + month).substr(-2) + "-" + ("0" + year).substr(-2);
+                    ("0" + day).substr(-2) + "-" + ("0" + month).substr(-2) + "-" + year;
                 clockSpan.textContent =
                     ("0" + hour).substr(-2) + ":" + ("0" + minute).substr(-2) + ":" + ("0" + second).substr(-2);
             }
             setInterval(date_time, 1000);
         </script>
-
-
     </div>
-    <form action="" method="get">
+    <form action="/api/upload-new" method="post">
         <div class="upload-page-div">
             <ul>
                 <li class="upload-new-page-li">
-                    <div>
-                        <input id="upload-new-page-link" type="url" placeholder="Image URL: 'https://...'" size="30px"
-                            pattern="https://.*" required>
-                        <input type="button" id="upload-new-page-url-button" value="Upload Image">
-                    </div>
-
-                    <input id="upload-new-page-title" type="text" id="" placeholder="Title...">
-                    <textarea id="upload-new-page-content" placeholder="Content..." cols="100" rows="20"
+                    <input name="title" id="upload-new-page-title" type="text" id="" placeholder="Title...">
+                    <textarea name="content" id="upload-new-page-content" placeholder="Content..." cols="100" rows="20"
                         required></textarea>
+                    <div>
+                        <input name="image" id="upload-new-page-link" type="url" placeholder="Image URL: 'https://...'" size="30px"
+                            pattern="https://.*" required>
+                        <!-- <input type="button" id="upload-new-page-url-button" value="Upload Image"> -->
+                    </div>
                 </li>
             </ul>
         </div>

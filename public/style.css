@@ -1,4 +1,4 @@
-body{
+body {
     background-color: whitesmoke;
 }
 
@@ -6,43 +6,76 @@ body{
     background-color: black;
 }
 
-#search-bar{
-    background-color: whitesmoke;
+#search-bar {
+    background-color: #c9c9c9;
+    border: 3px solid #c9c9c9;
+    border-radius: 10px;
 }
 
-#date-span{
+#search-bar-search-button {
+    background-color: #c9c9c9;
+    border: 3px solid #c9c9c9;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: medium;
+}
+
+#date-span {
     color: #c9c9c9;
     font-size: large;
     font-weight: 600;
 }
 
-#clock-span{
+#clock-span {
     color: #c9c9c9;
     font-size: large;
     font-weight: 600;
+}
+
+.page-login-register-upload-logout-button {
+    background-color: #c9c9c9;
+    border: 1px solid #c9c9c9;
+    border-radius: 10px;
+}
+
+.main-page-news {
+    box-shadow: 5px 5px rgb(241, 240, 240);
+    background-color: rgb(239, 238, 238);
+    border-radius: 5px;
 }
 
 .main-page-news-li {
     list-style-type: none;
 }
 
+.main-page-news-title {
+    color: black;
+}
+
+.main-page-news-content {
+    color: black;
+    font-size: larger;
+}
+
+.comment-section-username-p {
+    font-size: smaller;
+    font-weight: 900;
+}
+
 .upload-new-page-li {
     list-style-type: none;
 }
 
-.main-page-news-content {
+#upload-new-page-link {
     font-size: larger;
 }
 
-#upload-new-page-link{
+#upload-new-page-url-button {
     font-size: larger;
 }
 
-#upload-new-page-url-button{
-    font-size: larger;
-}
-
-#upload-new-page-title{
+#upload-new-page-title {
     font-size: x-large;
 }
 
@@ -133,6 +166,22 @@ li {
     position: relative;
 }
 
+#password-again {
+    width: 200px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 49px;
+    color: #c9c9c9;
+    font-weight: 600;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+}
+
 #upload-new-page-url-button {
     width: 150px;
     height: 30px;
@@ -144,21 +193,10 @@ li {
     cursor: pointer;
 }
 
-
 #upload-new-page-title {
-    width: 300px;
     background-color: rgb(50, 50, 50);
-    border: none;
-    outline: none;
-    height: 56px;
-    border-radius: 10px;
     color: #c9c9c9;
     font-weight: 600;
-    padding: 0px 0.7rem;
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: 15% 85%;
-    position: relative;
 }
 
 #upload-new-page-content {

@@ -13,8 +13,8 @@ p{
 }
 
 #search-bar{
-    margin-left: 10%;
-    width: 50%;
+    margin-left: 20%;
+    width: 40%;
     max-height: 20px;
     align-self: anchor-center;
     flex: none;
@@ -37,13 +37,13 @@ p{
     width: fit-content;
 }
 
-.main-page-login-register-upload{
+.main-page-login-register-upload-div{
     justify-content: right; 
     align-items: end; 
     display: flex;
 }
 
-.new-page-login-register-upload{
+.new-page-login-register-upload-div{
     justify-content: right; 
     align-items: end; 
     display: flex;
@@ -57,11 +57,16 @@ p{
     gap: 20px;
 }
 
+.main-page-news-title{
+    padding-left: 2%;
+}
+
 .main-page-news-content{
     vertical-align: top;
     margin: auto;
     font-size: larger;
     margin-bottom: 12%;
+    padding-left: 3%;
 }
 
 .main-page-news-div{
@@ -119,6 +124,13 @@ p{
     margin-left: 1%;
 }
 
+.comment-section-image-username-span{
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    gap: 5px;
+}
+
 .upload-new-page-div{
     justify-content: center;
     align-items: center;
@@ -134,12 +146,24 @@ p{
     flex-direction: column;
 }
 
+#upload-new-page-title {
+    width: 40%;
+    border: none;
+    outline: none;
+    height: 56px;
+    border-radius: 10px;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+}
+
 #upload-new-page-content{
     resize: none;
     width: 40%;
     height: 300px;
 }
-
 
 li{
     gap: 10px;
