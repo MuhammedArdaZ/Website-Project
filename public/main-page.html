@@ -3,12 +3,14 @@
 
 <head>
     <meta>
-    <link rel="stylesheet" href="main.css">
+
+  <link rel="stylesheet" href="main.css">
 
 <body>
     <div id="top-bar">
         <a href="main-page.html">
             <img src="logo-revert.png" alt="HasHaber" id="main-logo">
+
         </a>
         <input text="text" placeholder="Search a new..." id="search-bar">
         <a href="" id="search-bar-search-button">&#x1F50D</a>
@@ -43,15 +45,15 @@
     </div>
 
     <div class="main-page-login-register-upload-div">
-        <a href="login-page.html"><input id="login-button" class="page-login-register-upload-logout-button" type="button"
-                value="Login"></a>
-        <a href="register-page.html"><input id="register-button" class="page-login-register-upload-logout-button" type="button"
-                value="Register"></a>
+
+        <a href="login-page.html"><input id="login-button" class="page-login-register-upload-logout-button"
+                type="button" value="Login"></a>
+        <a href="register-page.html"><input id="register-button" class="page-login-register-upload-logout-button"
+                type="button" value="Register"></a>
         <a href="upload-new-page.html"><input id="upload-new-button" class="page-login-register-upload-logout-button"
                 type="button" value="Upload New"></a>
         <form action="/api/logout" method="post">
-            <a href="main-page.html"><input id="logout-button" class="page-login-register-upload-logout-button" type="submit"
-                    value="Logout"></a>
+            <input id="logout-button" class="page-login-register-upload-logout-button" type="submit" value="Logout">
         </form>
     </div>
     <script>
@@ -64,6 +66,7 @@
                     if (user.authenticationLevel >= 1) {
                         document.getElementById("upload-new-button").style.display = "inline-block";
                     } 
+
                     else {
                         document.getElementById("upload-new-button").style.display = "none";
                     }
@@ -127,6 +130,8 @@
         </ul>
     </div>
 </body>
+
 </head>
+
 
 </html>
