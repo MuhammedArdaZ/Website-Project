@@ -5,6 +5,8 @@ var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var fs = require("fs");
 var { v4: uuidv4 } = require("uuid");
+var bcrypt = require('bcrypt');
+const { error } = require("console");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -12,9 +14,11 @@ app.use(cookieParser());
 app.use(session({
     secret: "sample-secret",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
 }));
-app.use(express.static("public"))
+
+app.use(express.static("public"));
 
 function readNewsDB() {
     return JSON.parse(fs.readFileSync(("newsDB.json")));
@@ -41,8 +45,11 @@ app.get("/api/register", (req, res) => {
 
 
 app.post("/api/register", async function (req, res) {
-    const newsDatabase = await readNewsDB();
-    if (newsDatabase.find((user) => user.email === req.body.email)) {
+    let usersDatabase = await readUsersDB();
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    if (usersDatabase.find((user) => user.email === req.body.email)) {
         res.json({ message: "This email has been taken." });
     }
     else if (req.body.password !== req.body.passwordAgain) {
@@ -54,35 +61,45 @@ app.post("/api/register", async function (req, res) {
             name: req.body.name,
             surname: req.body.surname,
             email: req.body.email,
-            password: req.body.password,
+            password: hashedPassword,
             authenticationLevel: 0,
             isLoggedIn: false
         }
-        newsDatabase.push(newUser);
-        writeUsersDB(newsDatabase);
-        return res.send("User saved succesfully.");
+
+        usersDatabase.push(newUser);
+        writeUsersDB(usersDatabase);
+        res.redirect("/");
     }
 })
 
-app.post("/api/login", function (req, res) {
+app.post("/api/login", async function (req, res) {
     const userDatabase = readUsersDB();
     const user = userDatabase.find(function (user) { return user.email === req.body.email });
+
     if (user) {
-        if (user.password !== req.body.password) {
-            return res.send("Password is wrong!");
+
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+
+        if (isMatch == false) {
+            return res.send('Wrong password!');
         }
+
         else {
+            const userIndex = userDatabase.findIndex(u => u.email === req.body.email);
             userDatabase[userIndex].isLoggedIn = true; // Veritabanında güncelle
             writeUsersDB(userDatabase);
+
             req.session.user = {
                 id: user.id, email: user.email, name: user.name, surname: user.surname,
                 authenticationLevel: user.authenticationLevel, isLoggedIn: user.isLoggedIn
             };
             req.session.user.isLoggedIn = true;
             req.session.save();
+
             return res.redirect("/");
         }
     }
+
     else {
         return res.send("This account is not available.");
     }
@@ -95,6 +112,7 @@ app.post("/api/upload-new", async function (req, res) {
             url: url,
             encoding: null
         })
+
         const uploadNewData = {
             id: uuidv4(),
             title: req.body.title,
@@ -103,6 +121,7 @@ app.post("/api/upload-new", async function (req, res) {
             createdAt: new Date().toISOString(),
             author: req.session.user.id
         }
+
         let newsDatabase = await readNewsDB();
         newsDatabase.push(uploadNewData);
         writeNewsDB(newsDatabase);
@@ -113,18 +132,23 @@ app.post("/api/upload-new", async function (req, res) {
 })
 
 app.post("/api/logout", function (req, res) {
-    const userDatabase = readUsersDB();
-    const userIndex = userDatabase.findIndex(user => user.id === req.session.user.id);
- /////////////////////
-    
-    req.session.destroy();
+    if (req.session.user) {
+        const userDatabase = readUsersDB();
+        const userIndex = userDatabase.findIndex(user => user.id === req.session.user.id);
+        if (userIndex !== -1) {
+            userDatabase[userIndex].isLoggedIn = false;
+            writeUsersDB(userDatabase);
+        }
+        req.session.destroy();
+    }
     res.redirect("/");
-})
+});
 
 app.get("/api/currentUser", function (req, res) {
     if (req.session.user) {
         const userDatabase = readUsersDB();
         const user = userDatabase.find((user) => user.id === req.session.user.id);
+
         if (user) {
             return res.json({
                 id: user.id, email: user.email, name: user.name, surname: user.surname,

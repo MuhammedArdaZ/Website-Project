@@ -11,5 +11,23 @@
     "pug": "^3.0.3",
     "request": "^2.88.2",
     "uuid": "^11.1.0"
-  }
+  },
+  "name": "website-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SildeaX/Website-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SildeaX/Website-Project/issues"
+  },
+  "homepage": "https://github.com/SildeaX/Website-Project#readme"
 }
