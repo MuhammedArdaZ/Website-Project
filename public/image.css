@@ -1,5 +1,5 @@
 #main-logo{
-    margin-left: 1%;
+    margin-left: 10%;
     background-color: black;
     color: white;
     outline: none;
@@ -12,10 +12,6 @@
     width: auto;
     align-self: center;
     display: flex;
-    background-color: white;
-    text-decoration: none;
-    color: black;
-    font-size: medium;
 }
 
 #dark-light-theme-button{
@@ -43,4 +39,8 @@
     margin: auto;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+#comment-avatar-image{
+    height: 35px;
 }

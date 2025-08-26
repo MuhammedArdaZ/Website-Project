@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <link rel="stylesheet" href="main.css">
+
+<body>
+    <div id="top-bar">
+        <a href="main-page.html">
+            <img src="logo-revert.png" alt="HasHaber" id="main-logo">
+        </a>
+        <input text="text" placeholder="Search a new..." id="search-bar">
+        <a href="" id="search-bar-search-button">&#x1F50D</a>
+        <a href="" id="dark-light-theme-button">&#x1F315</a>
+
+        <div id="date-clock-div">
+            <span id="date-span"></span>
+            <span id="clock-span"></span>
+        </div>
+
+        <script>
+            var clockSpan = document.getElementById("clock-span");
+            var dateSpan = document.getElementById("date-span")
+            date_time()
+
+            function date_time() {
+                var date = new Date();
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear()
+                var second = date.getSeconds();
+                var minute = date.getMinutes();
+                var hour = date.getHours();
+
+                dateSpan.textContent =
+                    ("0" + day).substr(-2) + "-" + ("0" + month).substr(-2) + "-" + year;
+                clockSpan.textContent =
+                    ("0" + hour).substr(-2) + ":" + ("0" + minute).substr(-2) + ":" + ("0" + second).substr(-2);
+            }
+            setInterval(date_time, 1000);
+        </script>
+
+    </div>
+    <div class="new-page-login-register-upload-div">
+        <a href="login-page.html"><input id="login-button" class="page-login-register-upload-button" type="button"
+                value="Login"></a>
+        <a href="register-page.html"><input id="register-button" class="page-login-register-upload-button" type="button"
+                value="Register"></a>
+        <a href="upload-new-page.html"><input id="upload-new-button" class="page-login-register-upload-button"
+                type="button" value="Upload New"></a>
+        <a href="main-page.html"><input id="logout-button" class="page-login-register-upload-button" type="button"
+                value="Logout"></a>
+    </div>
+
+    <div class="new-page-news-div">
+        <ul>
+            <li>
+                <div>
+                    <img src="logo-revert.png" alt="Error" class="new-page-main-image">
+                    <h2 class="new-page-news-title">Title</h2>
+                    <p class="new-page-news-content">HasHaber Is The Best</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div id="new-page-comment-section-div">
+        <p style="font-weight: 900;">Comments</p>
+        <textarea id="new-page-comment-section" placeholder="Write Comment Here..." rows="4"></textarea>
+        <ul>
+            <li id="new-page-comment-section-li">
+                <div>
+                    <span class="comment-section-image-username-span">
+                        <img id="comment-avatar-image" src="GuessAvatar.png" alt="profile">
+                        <p class="comment-section-username-p">Username</p>
+                    </span>
+                    <p>Comment Sample</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</head>
+
+</html>

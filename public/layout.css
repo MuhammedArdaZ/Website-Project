@@ -8,21 +8,42 @@ body {
     padding: 0;
 }
 
+p{
+    overflow-wrap: break-word;
+}
+
 #search-bar{
-    margin-left: 10%;
-    width: 50%;
+    margin-left: 20%;
+    width: 40%;
     max-height: 20px;
     align-self: anchor-center;
     flex: none;
 }
 
-.main-page-login-register-upload{
+#date-clock-div{
+    width: fit-content;
+    height: 100px;
+    justify-content: space-evenly;
+    flex-direction: column;
+    display: flex;
+    margin: 20px;
+}
+
+#date-span{
+    width: fit-content;
+}
+
+#clock-span{
+    width: fit-content;
+}
+
+.main-page-login-register-upload-div{
     justify-content: right; 
     align-items: end; 
     display: flex;
 }
 
-.new-page-login-register-upload{
+.new-page-login-register-upload-div{
     justify-content: right; 
     align-items: end; 
     display: flex;
@@ -34,6 +55,26 @@ body {
     padding: 0px;
     margin: 0px;
     gap: 20px;
+}
+
+.main-page-news-title{
+    padding-left: 2%;
+}
+
+.main-page-news-content{
+    vertical-align: top;
+    margin: auto;
+    font-size: larger;
+    margin-bottom: 12%;
+    padding-left: 3%;
+}
+
+.main-page-news-div{
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    flex: content;
+    display: flex;
 }
 
 .register-login-upload{
@@ -48,21 +89,6 @@ body {
 .main-page-news-title{
     vertical-align: top;
     margin: auto;
-}
-
-.main-page-news-content{
-    vertical-align: top;
-    margin: auto;
-    font-size: larger;
-    margin-bottom: 12%;
-}
-
-.main-page-news-div{
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    flex: content;
-    display: flex;
 }
 
 .new-page-news-div{
@@ -85,6 +111,26 @@ body {
     margin-bottom: 12%;
 }
 
+#new-page-comment-section{
+    width: 100%;
+    resize: none;
+    border: none;
+    background-color: whitesmoke;
+    height: fit-content;
+}
+
+#new-page-comment-section-div{
+    width: 50%;
+    margin-left: 1%;
+}
+
+.comment-section-image-username-span{
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    gap: 5px;
+}
+
 .upload-new-page-div{
     justify-content: center;
     align-items: center;
@@ -100,24 +146,24 @@ body {
     flex-direction: column;
 }
 
-#upload-new-page-link{
-    font-size: larger;
-}
-
-#upload-new-page-url-button{
-    font-size: larger;
-}
-
-#upload-new-page-title{
-    font-size: x-large;
+#upload-new-page-title {
+    width: 40%;
+    border: none;
+    outline: none;
+    height: 56px;
+    border-radius: 10px;
+    padding: 0px 0.7rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
 }
 
 #upload-new-page-content{
-    resize: vertical;
+    resize: none;
     width: 40%;
     height: 300px;
 }
-
 
 li{
     gap: 10px;
