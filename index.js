@@ -1,10 +1,11 @@
-var express = require("express");
-var app = express();
-var session = require("express-session");
-var bodyParser = require("body-parser");
-var cookieParser = require("cookie-parser");
-var fs = require("fs");
-var { v4: uuidv4 } = require("uuid");
+const express = require("express");
+const app = express();
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcrypt");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -34,52 +35,51 @@ app.get("/", function (req, res) {
     res.sendFile(__dirname + "/public/main-page.html");
 })
 
-//
-app.get("/api/register", (req, res) => {
-    res.send("Register sayfası sadece POST ile çalışır.");
-});
-
-
 app.post("/api/register", async function (req, res) {
-    const newsDatabase = await readNewsDB();
-    if (newsDatabase.find((user) => user.email === req.body.email)) {
+    const usersDatabase = await readUsersDB();
+    if (usersDatabase.find((user) => user.email === req.body.email)) {
         res.json({ message: "This email has been taken." });
     }
     else if (req.body.password !== req.body.passwordAgain) {
         res.json({ message: "Passwords do not match!" });
     }
     else {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = {
             id: uuidv4(),
             name: req.body.name,
             surname: req.body.surname,
             email: req.body.email,
-            password: req.body.password,
+            password: hashedPassword,
             authenticationLevel: 0,
+            postedNews: [],
+            comments: [],
             isLoggedIn: false
         }
-        newsDatabase.push(newUser);
-        writeUsersDB(newsDatabase);
-        return res.send("User saved succesfully.");
+        usersDatabase.push(newUser);
+        writeUsersDB(usersDatabase);
+        return res.redirect("/main-page.html");
     }
 })
 
-app.post("/api/login", function (req, res) {
+app.post("/api/login", async function (req, res) {
     const userDatabase = readUsersDB();
-    const user = userDatabase.find(function (user) { return user.email === req.body.email });
-    if (user) {
-        if (user.password !== req.body.password) {
+    const userIndex = userDatabase.findIndex(function (user) { return user.email === req.body.email });
+    if (userIndex !== -1) {
+        let user = userDatabase[userIndex];
+        const comparePassword = await bcrypt.compare(req.body.password, user.password)
+        if (!comparePassword) {
             return res.send("Password is wrong!");
         }
         else {
-            userDatabase[userIndex].isLoggedIn = true; // Veritabanında güncelle
+            user.isLoggedIn = true;
             writeUsersDB(userDatabase);
             req.session.user = {
-                id: user.id, email: user.email, name: user.name, surname: user.surname,
-                authenticationLevel: user.authenticationLevel, isLoggedIn: user.isLoggedIn
+                id: user.id, email: user.email, name: user.name, surname: user.surname, authenticationLevel: user.authenticationLevel,
+                postedNews: user.postedNews, comments: user.comments, isLoggedIn: true
             };
-            req.session.user.isLoggedIn = true;
             req.session.save();
+            console.log(req.session.user); //////////////////////////////
             return res.redirect("/");
         }
     }
@@ -100,6 +100,9 @@ app.post("/api/upload-new", async function (req, res) {
             title: req.body.title,
             content: req.body.content,
             image: req.body.image,
+            category: req.body.category,
+            comments: [],
+            views: 0,
             createdAt: new Date().toISOString(),
             author: req.session.user.id
         }
@@ -113,27 +116,42 @@ app.post("/api/upload-new", async function (req, res) {
 })
 
 app.post("/api/logout", function (req, res) {
-    const userDatabase = readUsersDB();
-    const userIndex = userDatabase.findIndex(user => user.id === req.session.user.id);
- /////////////////////
-    
-    req.session.destroy();
-    res.redirect("/");
+    if (req.session.user) {
+        const userDatabase = readUsersDB();
+        const userIndex = userDatabase.findIndex(user => user.id === req.session.user.id);
+        if (userIndex !== -1) {
+            userDatabase[userIndex].isLoggedIn = false; 
+            writeUsersDB(userDatabase);
+        }
+        req.session.destroy();
+    }
+    res.redirect("/main-page.html");
 })
 
+
 app.get("/api/currentUser", function (req, res) {
-    if (req.session.user) {
+    console.log(req.session.user + "___CurrentUSER"); //////////////////////////////
+    if (req.session.user !== undefined) {
         const userDatabase = readUsersDB();
         const user = userDatabase.find((user) => user.id === req.session.user.id);
         if (user) {
             return res.json({
-                id: user.id, email: user.email, name: user.name, surname: user.surname,
-                authenticationLevel: user.authenticationLevel, isLoggedIn: user.isLoggedIn
+                id: user.id, email: user.email, name: user.name, surname: user.surname, authenticationLevel: user.authenticationLevel,
+                comments: user.comments, postedNews: user.postedNews, isLoggedIn: user.isLoggedIn
             });
         }
         return res.json(null);
     }
     return res.json(null);
-})
+})  
+
+app.get("/api/news/:id", function (req, res) {
+    const newsDatabase = readNewsDB();
+    const newsData = newsDatabase.find((news) => news.id === req.params.id);
+    if (!newsData) {
+        return res.status(404).json({ error: "News not found" })
+    };
+    res.json(newsData);
+});
 
 app.listen(3000);

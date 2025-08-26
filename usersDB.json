@@ -1,10 +1,13 @@
 [
     {
-        "id": "e5bff4b4-19e1-4a1b-bc8f-50c93998f9ea",
-        "name": "Muhammed",
-        "surname": "Zor",
-        "email": "zmuhammedarda@gmail.com",
-        "password": "1",
-        "authenticationLevel": 0
+        "id": "a5cd6cea-53eb-4817-8414-ce25fc92eabf",
+        "name": "a",
+        "surname": "a",
+        "email": "a@gmail.com",
+        "password": "$2b$10$X9qc19BZtVD9af/2lHPbJuV6a0J.cL7gmmc2t5tfTCNvdrFdjTe2.",
+        "authenticationLevel": 0,
+        "postedNews": [],
+        "comments": [],
+        "isLoggedIn": true
     }
 ]

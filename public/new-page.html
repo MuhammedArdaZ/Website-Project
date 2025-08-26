@@ -42,16 +42,42 @@
         </script>
 
     </div>
-    <div class="new-page-login-register-upload-div">
-        <a href="login-page.html"><input id="login-button" class="page-login-register-upload-button" type="button"
-                value="Login"></a>
-        <a href="register-page.html"><input id="register-button" class="page-login-register-upload-button" type="button"
-                value="Register"></a>
-        <a href="upload-new-page.html"><input id="upload-new-button" class="page-login-register-upload-button"
+
+    <div class="main-page-login-register-upload-div">
+        <a href="login-page.html"><input id="login-button" class="page-login-register-upload-logout-button"
+                type="button" value="Login"></a>
+        <a href="register-page.html"><input id="register-button" class="page-login-register-upload-logout-button"
+                type="button" value="Register"></a>
+        <a href="upload-new-page.html"><input id="upload-new-button" class="page-login-register-upload-logout-button"
                 type="button" value="Upload New"></a>
-        <a href="main-page.html"><input id="logout-button" class="page-login-register-upload-button" type="button"
-                value="Logout"></a>
+        <form action="/api/logout" method="post">
+            <a href="main-page.html"><input id="logout-button" class="page-login-register-upload-logout-button"
+                    type="submit" value="Logout"></a>
+        </form>
     </div>
+    <script>
+        fetch("/api/currentUser")
+            .then(res => res.json())
+            .then(user => {
+                if (user && user.isLoggedIn) {
+                    document.getElementById("login-button").style.display = "none";
+                    document.getElementById("register-button").style.display = "none";
+                    if (user.authenticationLevel >= 1) {
+                        document.getElementById("upload-new-button").style.display = "inline-block";
+                    }
+                    else {
+                        document.getElementById("upload-new-button").style.display = "none";
+                    }
+                    document.getElementById("logout-button").style.display = "inline-block";
+                }
+                else {
+                    document.getElementById("login-button").style.display = "inline-block";
+                    document.getElementById("register-button").style.display = "inline-block";
+                    document.getElementById("upload-new-button").style.display = "none";
+                    document.getElementById("logout-button").style.display = "none";
+                }
+            });
+    </script>
 
     <div class="new-page-news-div">
         <ul>
