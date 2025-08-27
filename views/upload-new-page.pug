@@ -1,0 +1,68 @@
+html(lang="en")
+  head
+    meta
+    title HasHaber/post-news
+    link(rel="stylesheet", href="/main.css")
+  
+  body
+    #top-bar
+      a(href="main-page")
+        img#main-logo(src="/logo-revert.png", alt="HasHaber")
+      a#dark-light-theme-button(href="") &#x1F315
+
+      #date-clock-div
+        span#date-span
+        span#clock-span
+
+      script.
+        var clockSpan = document.getElementById("clock-span");
+        var dateSpan = document.getElementById("date-span")
+        date_time()
+
+        function date_time() {
+          var date = new Date();
+          var day = date.getDate();
+          var month = date.getMonth() + 1;
+          var year = date.getFullYear()
+          var second = date.getSeconds();
+          var minute = date.getMinutes();
+          var hour = date.getHours();
+
+          dateSpan.textContent =
+            ("0" + day).substr(-2) + "-" + ("0" + month).substr(-2) + "-" + year;
+          clockSpan.textContent =
+            ("0" + hour).substr(-2) + ":" + ("0" + minute).substr(-2) + ":" + ("0" + second).substr(-2);
+        }
+        setInterval(date_time, 1000);
+
+    form(action="/api/upload-new", method="post")
+      .upload-page-div
+        ul
+          li.upload-new-page-li
+            input#upload-new-page-title(
+              name="title"
+              type="text"
+              placeholder="Title..."
+            )
+            textarea#upload-new-page-content(
+              name="content"
+              placeholder="Content..."
+              cols="100"
+              rows="20"
+              required
+            )
+            div
+              input#upload-new-page-link(
+                name="image"
+                type="url"
+                placeholder="Image URL: 'https://...'"
+                size="30"
+                pattern="https://.*"
+                required
+              )
+
+      .register-login-upload
+        input.register-login-upload-button(
+          type="submit"
+          value="Upload"
+        )
