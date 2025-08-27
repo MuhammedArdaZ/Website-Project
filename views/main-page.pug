@@ -38,23 +38,23 @@ html
 
     .main-page-login-register-upload-div
       if !user || !user.isLoggedIn
-        a(href="/login")
-          input#login-button.page-login-register-upload-logout-button(type="button", value="Login")
-        a(href="/register")
-          input#register-button.page-login-register-upload-logout-button(type="button", value="Register")
+        form(action="/login" method="get")
+          input#login-button.page-login-register-upload-logout-button(type="submit", value="Login")
+        form(action="/register" method="get")
+          input#register-button.page-login-register-upload-logout-button(type="submit", value="Register")
       else
         if user.authenticationLevel >= 1
-          a(href="/upload")
-            input#upload-new-button.page-login-register-upload-logout-button(type="button", value="Upload New")
+        form(action="/upload" method="get")
+          input#upload-new-button.page-login-register-upload-logout-button(type="submit", value="Upload New")
         form(action="/api/logout", method="post")
           input#logout-button.page-login-register-upload-logout-button(type="submit", value="Logout")
 
     .main-page-news-div
-      ul
-        li#main-page-news-li
-          - for (var i = 0; i < 6; i++)
-            a.main-page-news(href="/news/" + i)
+      ul#main-page-news-ul
+        each newObject in news
+          li#main-page-news-li
+            a.main-page-news(href="/news/" + newObject.id)
               div
-                img.main-page-main-image(src="/logo-revert.png", alt="Error")
-                h2.main-page-news-title Title
-                p.main-page-news-content HasHaber Is The Best
+                img.main-page-main-image(src= newObject.image , alt="Error")
+                h2.main-page-news-title #{newObject.title}
+                p.main-page-news-content #{newObject.content.substring(0, 30)}...

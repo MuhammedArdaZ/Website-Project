@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
+const fetch = require("node-fetch").default;
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -16,7 +17,11 @@ app.use(cookieParser());
 app.use(session({
     secret: "sample-secret",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        secure: false,
+        maxAge: 60 * 60 * 1000 // 1 hour
+    }
 }));
 app.use(express.static("public"))
 
@@ -35,10 +40,14 @@ function writeUsersDB(data) {
 
 
 app.get("/", function (req, res) {
-    res.render("main-page", { user: req.session.user });
+    let lastSixNews = readNewsDB().slice(-6).reverse();
+    res.render("main-page", { 
+        news: lastSixNews, 
+        user: req.session.user ? req.session.user : null 
+    });
 })
 
-app.get("register", function (req, res) {
+app.get("/register", function (req, res) {
     res.render("register-page");
 })
 
@@ -65,7 +74,7 @@ app.post("/api/register", async function (req, res) {
         }
         usersDatabase.push(newUser);
         writeUsersDB(usersDatabase);
-        return res.render("main-page", { user: req.session.user, message: "Your account has been created successfully." });
+        return res.redirect("/");
     }
 })
 
@@ -89,10 +98,11 @@ app.post("/api/login", async function (req, res) {
                 id: user.id, email: user.email, name: user.name, surname: user.surname, authenticationLevel: user.authenticationLevel,
                 postedNews: user.postedNews, comments: user.comments, isLoggedIn: true
             };
-            req.session.save(() => {
-                return res.render("main-page", {
-                    user: req.session.user
-                });
+            req.session.save((err) => {
+                if(err) {
+                    return res.send("Session save error.");
+                }
+                res.redirect("/");
             });
         }
     }
@@ -102,18 +112,17 @@ app.post("/api/login", async function (req, res) {
 })
 
 app.get("/upload", function (req, res) {
-    res.render("new-page", { user: req.session.user });
+    res.render("upload-new-page", { user: req.session.user });
 })
 
 app.post("/api/upload-new", async function (req, res) {
     if (req.session.user && req.session.user.authenticationLevel >= 1) {
         const url = req.body.image;
-        request({
-            url: url,
-            encoding: null
-        })
+        const response = await fetch(url);
+
+        let newsDatabase = await readNewsDB();
         const uploadNewData = {
-            id: uuidv4(),
+            id: newsDatabase[newsDatabase.length - 1].id + 1,
             title: req.body.title,
             content: req.body.content,
             image: req.body.image,
@@ -123,7 +132,6 @@ app.post("/api/upload-new", async function (req, res) {
             createdAt: new Date().toISOString(),
             author: req.session.user.id
         }
-        let newsDatabase = await readNewsDB();
         newsDatabase.push(uploadNewData);
         writeNewsDB(newsDatabase);
         return res.json({ message: "New uploaded succesfully." });
@@ -142,7 +150,7 @@ app.post("/api/logout", function (req, res) {
         }
         req.session.destroy();
     }
-    res.render("main-page", { user: null, message: "You have logged out successfully." });
+    res.redirect("/");
 })
 
 
@@ -160,6 +168,11 @@ app.get("/api/currentUser", function (req, res) {
     }
     return res.json(null);
 })
+
+app.get("/api/news", async function (req, res) {
+    const newsDatabase = await readNewsDB();
+    res.json(newsDatabase);
+});
 
 app.get("/api/news/:id", function (req, res) {
     const newsDatabase = readNewsDB();
