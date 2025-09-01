@@ -43,23 +43,26 @@ html(lang="en")
               name="title"
               type="text"
               placeholder="Title..."
+              minlength= "1"
+              maxlength= "50"
+              required
             )
             textarea#upload-new-page-content(
               name="content"
               placeholder="Content..."
               cols="100"
               rows="20"
+              minlength= "1"
               required
             )
-            div
-              input#upload-new-page-link(
-                name="image"
-                type="url"
-                placeholder="Image URL: 'https://...'"
-                size="30"
-                pattern="https://.*"
-                required
-              )
+            input#upload-new-page-link(
+              name="image"
+              type="url"
+              placeholder="Image URL: 'https://...'"
+              size="30"
+              pattern="https://.*"
+              required
+            )
 
       .register-login-upload
         input.register-login-upload-button(

@@ -43,32 +43,40 @@ p{
     display: flex;
 }
 
-.new-page-login-register-upload-div{
-    justify-content: right; 
-    align-items: end; 
+.main-page-container{
+    display: flex;
+    justify-content: center;
+}
+
+.left-side{
+    flex: 1;
+}
+
+.main-page-center-div{
+    flex: 2;
+    flex-wrap: wrap;
+    justify-content: center;
     display: flex;
 }
 
+.right-side{
+    flex: 1;
+}
+
 #main-page-news-ul{
-    width: 40%;
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 0px;
     list-style-type: none;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20%;
-    align-items: center;
-}
-
-#main-page-news-li{
-    display: grid;
-    padding: 0px;
-    margin: 0px;
+    gap: 5%;
 }
 
 .main-page-news-title{
+    padding-top: 1%;
     padding-left: 2%;
+    overflow-wrap: break-word;
 }
 
 .main-page-news-content{
@@ -76,15 +84,7 @@ p{
     margin: auto;
     font-size: larger;
     margin-bottom: 12%;
-    padding-left: 3%;
-}
-
-.main-page-news-div{
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    flex: content;
-    display: flex;
+    padding-left: 2%;
 }
 
 .register-login-upload{
@@ -96,14 +96,21 @@ p{
     flex-direction: column;
 }
 
+.new-page-login-register-upload-div{
+    justify-content: right; 
+    align-items: end; 
+    display: flex;
+}
+
 .main-page-news-title{
     vertical-align: top;
     margin: auto;
 }
 
 .new-page-news-div{
-    margin: auto;
-    justify-content: center;
+    flex-direction: column;
+    margin: 20px auto;
+    justify-content: flex-start;
     align-items: center;
     flex: content;
     display: flex;
@@ -112,6 +119,7 @@ p{
 .new-page-news-title{
     vertical-align: top;
     margin: auto;
+    overflow-wrap: break-word;
 }
 
 .new-page-news-content{
@@ -121,8 +129,19 @@ p{
     margin-bottom: 12%;
 }
 
+#new-page-comment-section-upload-button{
+    width: fit-content;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 5%;
+    margin-left: 62%;
+}
+
 #new-page-comment-section{
-    width: 100%;
+    width: 70%;
     resize: none;
     border: none;
     background-color: whitesmoke;
@@ -175,6 +194,10 @@ p{
     height: 300px;
 }
 
+#upload-new-page-link{
+    width: 40%;
+}
+
 li{
     gap: 10px;
     flex-direction: column;
@@ -184,4 +207,49 @@ li{
 ul{
     padding: 0px;
     margin: 0px;
+}
+
+.profile-page {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  flex-direction: column;
+}
+
+.profile-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 300px;
+  align-self: center;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.profile-name {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.profile-created {
+  font-size: 14px;
+  color: #666;
+}
+
+.profile-comment-div {
+  margin-bottom: 30px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.profile-comments{
+    margin-left: 1%;
 }

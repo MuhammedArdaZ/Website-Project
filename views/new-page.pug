@@ -38,23 +38,34 @@ html
 
     .main-page-login-register-upload-div
       if !user || !user.isLoggedIn
-        a(href="/login")
-          input#login-button.page-login-register-upload-logout-button(type="button", value="Login")
-        a(href="/register")
-          input#register-button.page-login-register-upload-logout-button(type="button", value="Register")
+        form(action="/login" method="get")
+          input#login-button.page-login-register-upload-logout-button(type="submit", value="Login")
+        form(action="/register" method="get")
+          input#register-button.page-login-register-upload-logout-button(type="submit", value="Register")
       else
         if user.authenticationLevel >= 1
-          a(href="/upload")
-            input#upload-new-button.page-login-register-upload-logout-button(type="button", value="Upload New")
+          form(action="/upload" method="get")
+            input#upload-new-button.page-login-register-upload-logout-button(type="submit", value="Upload New")
         form(action="/api/logout", method="post")
           input#logout-button.page-login-register-upload-logout-button(type="submit", value="Logout")
 
-    .new-page-news-div
-    #new-page-comment-section-div
+    div.new-page-news-div
+      div
+        img.new-page-main-image(src= newsData.image, alt= "Error")
+        h2.new-page-news-title #{newsData.title}
+        p.new-page-news-content #{newsData.content}
+            
+    div#new-page-comment-section-div
+      p(style="font-weight: 900;") Comments
+      form(action="/api/news/" + newsData.newsId + "/addComment/", method="post") 
+        textarea#new-page-comment-section(placeholder="Write Comment Here...", name="commentText", rows="4", minlength="1", maxlength="300")
+        input#new-page-comment-section-upload-button(type="submit", value="Add Comment") 
       ul
-        li.comment-section-li
-          .comment-section-div
-            span.comment-section-image-username-span
-              img#comment-avatar-image(src="GuessAvatar.png", alt="profile")
-              p.comment-section-username-p Username
-            p.comment-section-comment-p This is a comment
+        each comment in newsData.comments
+          li.comment-section-li
+            .comment-section-div
+              span.comment-section-image-username-span
+                img#comment-avatar-image(src=comment.user.avatar || '/GuestAvatar.png', alt="profile")
+                p.comment-section-username-p #{comment.user.name} #{comment.user.surname.substring(0,1)}.
+              p.comment-section-comment-p #{comment.commentText}
+  

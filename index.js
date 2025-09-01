@@ -41,9 +41,9 @@ function writeUsersDB(data) {
 
 app.get("/", function (req, res) {
     let lastSixNews = readNewsDB().slice(-6).reverse();
-    res.render("main-page", { 
-        news: lastSixNews, 
-        user: req.session.user ? req.session.user : null 
+    res.render("main-page", {
+        news: lastSixNews,
+        user: req.session.user !== undefined ? req.session.user : undefined
     });
 })
 
@@ -67,9 +67,8 @@ app.post("/api/register", async function (req, res) {
             surname: req.body.surname,
             email: req.body.email,
             password: hashedPassword,
+            avatar: "/GuestAvatar.png",
             authenticationLevel: 0,
-            postedNews: [],
-            comments: [],
             isLoggedIn: false
         }
         usersDatabase.push(newUser);
@@ -95,14 +94,14 @@ app.post("/api/login", async function (req, res) {
             user.isLoggedIn = true;
             writeUsersDB(userDatabase);
             req.session.user = {
-                id: user.id, email: user.email, name: user.name, surname: user.surname, authenticationLevel: user.authenticationLevel,
+                id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, authenticationLevel: user.authenticationLevel,
                 postedNews: user.postedNews, comments: user.comments, isLoggedIn: true
             };
             req.session.save((err) => {
-                if(err) {
+                if (err) {
                     return res.send("Session save error.");
                 }
-                res.redirect("/");
+                return res.redirect("/");
             });
         }
     }
@@ -122,11 +121,10 @@ app.post("/api/upload-new", async function (req, res) {
 
         let newsDatabase = await readNewsDB();
         const uploadNewData = {
-            id: newsDatabase[newsDatabase.length - 1].id + 1,
-            title: req.body.title,
-            content: req.body.content,
+            newsId: newsDatabase[newsDatabase.length - 1].newsId + 1,
+            title: req.body.title.trim(),
+            content: req.body.content.trim(),
             image: req.body.image,
-            category: req.body.category,
             comments: [],
             views: 0,
             createdAt: new Date().toISOString(),
@@ -134,7 +132,7 @@ app.post("/api/upload-new", async function (req, res) {
         }
         newsDatabase.push(uploadNewData);
         writeNewsDB(newsDatabase);
-        return res.json({ message: "New uploaded succesfully." });
+        return res.redirect("/");
     }
     else
         return res.json({ message: "You need to login before upload any news." });
@@ -160,7 +158,7 @@ app.get("/api/currentUser", function (req, res) {
         const user = userDatabase.find((user) => user.id === req.session.user.id);
         if (user) {
             return res.json({
-                id: user.id, email: user.email, name: user.name, surname: user.surname, authenticationLevel: user.authenticationLevel,
+                id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, authenticationLevel: user.authenticationLevel,
                 comments: user.comments, postedNews: user.postedNews, isLoggedIn: user.isLoggedIn
             });
         }
@@ -174,13 +172,70 @@ app.get("/api/news", async function (req, res) {
     res.json(newsDatabase);
 });
 
-app.get("/api/news/:id", function (req, res) {
+app.get("/api/news/:newsId", function (req, res) {
     const newsDatabase = readNewsDB();
-    const newsData = newsDatabase.find((news) => news.id === req.params.id);
-    if (!newsData) {
+    const newsIndex = newsDatabase.findIndex((news) => news.newsId == req.params.newsId);
+    if (newsIndex === -1) {
         return res.status(404).json({ error: "News not found" });
     };
-    res.json(newsData);
+    newsDatabase[newsIndex].views += 1;
+    writeNewsDB(newsDatabase);
+    const newsData = newsDatabase[newsIndex];
+    console.log(JSON.stringify(newsData.comments));
+    res.render("new-page", { newsData: newsData, user: req.session.user || null });
+});
+
+app.post("/api/news/:newsId/addComment/", function (req, res) {
+    const newsID = parseInt(req.params.newsId);
+    if (req.session.user && req.session.user.isLoggedIn) {
+        const newsDatabase = readNewsDB();
+        const usersDatabase = readUsersDB();
+        const newsIndex = newsDatabase.findIndex((news) => news.newsId === newsID);
+        const userIndex = usersDatabase.findIndex((user) => user.id === req.session.user.id);
+        if (newsIndex === -1) {
+            return res.status(404).json({ error: "News not found" });
+        }
+        if (userIndex === -1) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        const newComment = {
+            commentId: uuidv4(),
+            commentText: String(req.body.commentText).trim(),
+            createdAt: new Date().toISOString(),
+            user: req.session.user,
+        };
+        newsDatabase[newsIndex].comments.push(newComment);
+        writeNewsDB(newsDatabase);
+        writeUsersDB(usersDatabase);
+        return res.redirect("/api/news/" + newsID);
+    }
+    else {
+        return res.render("login-page");
+    }
+});
+
+app.get("/user/profile", function (req, res) {
+    const user = req.session.user;
+    const newsDatabase = readNewsDB();
+    
+    // Yorumları toplamak için boş bir dizi oluşturun
+    let allComments = [];
+
+    // Tüm haberleri ve yorumlarını gezerek kullanıcının yorumlarını toplayın
+    newsDatabase.forEach((news) => {
+        news.comments.forEach((comment) => {
+            if (comment.user.id === user.id) {
+                allComments.push({
+                    newsId: news.newsId,
+                    commentText: comment.commentText,
+                    createdAt: comment.createdAt
+                });
+            }
+        });
+    });
+
+    // Tüm yorumlar toplandıktan sonra sayfayı render edin
+    return res.render("profile-page", { user: user, comments: allComments });
 });
 
 app.listen(3000);

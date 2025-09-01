@@ -1,13 +1,12 @@
 [
     {
-        "id": "e1f3b0e6-9e74-4d07-8d65-bd83295d9d98",
+        "id": "dde36131-6154-4b5b-a514-63a5f75a9b16",
         "name": "a",
         "surname": "a",
         "email": "a@gmail.com",
-        "password": "$2b$10$MrVZvALZqTVax0ISNif6ZuVaJuyTOrHY7697WssOAtSYIcdYy7nLm",
+        "password": "$2b$10$xALVbqAD/8LQ.PMJ29py8.BC95bJiF3duHmZyF/JuEMZyLHpgtzaG",
+        "avatar": "/GuestAvatar.png",
         "authenticationLevel": 1,
-        "postedNews": [],
-        "comments": [],
         "isLoggedIn": true
     }
 ]

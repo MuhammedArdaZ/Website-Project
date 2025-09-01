@@ -10,7 +10,7 @@ html
       input#search-bar(type="text", placeholder="Search a new...")
       a#search-bar-search-button(href="") &#x1F50D
       if user && user.isLoggedIn
-        a(href="/user/profile")
+        a(href="/profile")
           img#top-bar-profile-avatar(src=user.avatar, alt="Avatar")
       a#dark-light-theme-button(href="") &#x1F315
 
@@ -39,30 +39,28 @@ html
         }
         setInterval(date_time, 1000);
 
-    .main-page-login-register-upload-div
-      if !user || !user.isLoggedIn
-        form(action="/login" method="get")
-          input#login-button.page-login-register-upload-logout-button(type="submit", value="Login")
-        form(action="/register" method="get")
-          input#register-button.page-login-register-upload-logout-button(type="submit", value="Register")
-      else
-        if user.authenticationLevel >= 1
-          form(action="/upload" method="get")
-            input#upload-new-button.page-login-register-upload-logout-button(type="submit", value="Upload New")
-        form(action="/api/logout", method="post")
-          input#logout-button.page-login-register-upload-logout-button(type="submit", value="Logout")
+    block content
+      .profile-page
+        .profile-card
+          img.profile-avatar(src=user.avatar alt="profile")
+          
+          h2.profile-name #{user.name} #{user.surname.substring(0,1)}.
 
-    .main-page-container
-      .main-page-left-side
+          if user.email
+            p.profile-email Email: #{user.email}
 
-      .main-page-center-div
-        ul#main-page-news-ul
-          each newObject in news
-            a.main-page-news(href="/api/news/" + newObject.newsId)
-              div
-                img.main-page-main-image(src= newObject.image , alt="Error")
-                h2.main-page-news-title #{newObject.title}
-                p.main-page-news-content #{newObject.content.substring(0, 50)}...
+          if user.username
+            p.profile-username #{user.username}
 
-      .main-page-right-side
-      
+        .profile-comments
+          h2 Comments
+          if comments.length === 0
+            p No comments yet. 
+          else
+            each comment in comments
+              a(href=`api/news/${comment.newsId}`)
+                div
+                  .profile-comment-div
+                    span.comment-section-image-username-span
+                    p.comment-section-comment-p #{comment.commentText}
+                    p.comment-created-at Posted on: #{new Date(comment.createdAt).toLocaleString()} 

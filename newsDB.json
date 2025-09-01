@@ -1,63 +1,81 @@
 [
     {
-        "id": 0,
-        "title": "HasHaber Opened!!!",
-        "content": " Hashaber was borned today!",
-        "image": "https://i.hizliresim.com/4gq3k6w.jpg",
-        "category": "General",
-        "comments": [],
-        "views": 0,
-        "createdAt": "2024-06-10T12:00:00Z",
-        "author": "System"
-    },
-    {
-        "id": 1,
+        "newsId": 0,
         "title": "a",
         "content": "a",
         "image": "https://www.google.com/imgres?q=image&imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F057%2F068%2F323%2Fsmall%2Fsingle-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-photos%2Fimage&docid=eqP1G-YlcRwZgM&tbnid=M9lxeUbX5avg3M&vet=12ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA..i&w=367&h=200&hcb=2&ved=2ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA",
         "comments": [],
-        "views": 0,
-        "createdAt": "2025-08-27T12:14:02.220Z",
-        "author": "e1f3b0e6-9e74-4d07-8d65-bd83295d9d98"
+        "views": 2,
+        "createdAt": "2025-09-01T11:59:59.990Z",
+        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     },
     {
-        "id": 2,
+        "newsId": 1,
         "title": "a",
         "content": "a",
-        "image": "https://www.google.com/imgres?q=image&imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F057%2F068%2F323%2Fsmall%2Fsingle-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-photos%2Fimage&docid=eqP1G-YlcRwZgM&tbnid=M9lxeUbX5avg3M&vet=12ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA..i&w=367&h=200&hcb=2&ved=2ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA",
-        "comments": [],
-        "views": 0,
-        "createdAt": "2025-08-27T12:14:02.220Z",
-        "author": "e1f3b0e6-9e74-4d07-8d65-bd83295d9d98"
+        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
+        "comments": [
+            {
+                "commentId": "f8dfde18-9117-48cd-a555-060e0bf2648a",
+                "commentText": "a",
+                "createdAt": "2025-09-01T12:09:21.623Z",
+                "user": {
+                    "id": "dde36131-6154-4b5b-a514-63a5f75a9b16",
+                    "email": "a@gmail.com",
+                    "name": "a",
+                    "surname": "a",
+                    "avatar": "/GuestAvatar.png",
+                    "authenticationLevel": 1,
+                    "isLoggedIn": true
+                }
+            },
+            {
+                "commentId": "0ed2ddc1-07e1-4b8a-ac10-7e139c0746a0",
+                "commentText": "kajbfajskfbasjkfbajkfb",
+                "createdAt": "2025-09-01T12:27:05.550Z",
+                "user": {
+                    "id": "dde36131-6154-4b5b-a514-63a5f75a9b16",
+                    "email": "a@gmail.com",
+                    "name": "a",
+                    "surname": "a",
+                    "avatar": "/GuestAvatar.png",
+                    "authenticationLevel": 1,
+                    "isLoggedIn": true
+                }
+            }
+        ],
+        "views": 6,
+        "createdAt": "2025-09-01T12:01:07.222Z",
+        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     },
     {
-        "id": 3,
-        "title": "a",
-        "content": "a",
-        "image": "https://www.google.com/imgres?q=image&imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F057%2F068%2F323%2Fsmall%2Fsingle-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-photos%2Fimage&docid=eqP1G-YlcRwZgM&tbnid=M9lxeUbX5avg3M&vet=12ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA..i&w=367&h=200&hcb=2&ved=2ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA",
+        "newsId": 2,
+        "title": "b",
+        "content": "b",
+        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
         "comments": [],
-        "views": 0,
-        "createdAt": "2025-08-27T12:14:02.220Z",
-        "author": "e1f3b0e6-9e74-4d07-8d65-bd83295d9d98"
+        "views": 4,
+        "createdAt": "2025-09-01T12:01:26.880Z",
+        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     },
     {
-        "id": 4,
-        "title": "a",
-        "content": "a",
-        "image": "https://www.google.com/imgres?q=image&imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F057%2F068%2F323%2Fsmall%2Fsingle-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-photos%2Fimage&docid=eqP1G-YlcRwZgM&tbnid=M9lxeUbX5avg3M&vet=12ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA..i&w=367&h=200&hcb=2&ved=2ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA",
+        "newsId": 3,
+        "title": "c",
+        "content": "c",
+        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
         "comments": [],
-        "views": 0,
-        "createdAt": "2025-08-27T12:14:02.220Z",
-        "author": "e1f3b0e6-9e74-4d07-8d65-bd83295d9d98"
+        "views": 8,
+        "createdAt": "2025-09-01T12:01:40.746Z",
+        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     },
     {
-        "id": 5,
-        "title": "a",
-        "content": "a",
-        "image": "https://www.google.com/imgres?q=image&imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fthumbnails%2F057%2F068%2F323%2Fsmall%2Fsingle-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-photos%2Fimage&docid=eqP1G-YlcRwZgM&tbnid=M9lxeUbX5avg3M&vet=12ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA..i&w=367&h=200&hcb=2&ved=2ahUKEwiP3LT_vaWPAxVkVPEDHX2PJ6cQM3oECBkQAA",
+        "newsId": 4,
+        "title": "asdasd",
+        "content": "asdasdsa",
+        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
         "comments": [],
-        "views": 0,
-        "createdAt": "2025-08-27T12:14:02.220Z",
-        "author": "e1f3b0e6-9e74-4d07-8d65-bd83295d9d98"
+        "views": 1,
+        "createdAt": "2025-09-01T12:24:23.977Z",
+        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     }
 ]

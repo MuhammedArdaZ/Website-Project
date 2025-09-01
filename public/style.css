@@ -58,6 +58,17 @@ body {
     font-size: larger;
 }
 
+.new-page-news-content {
+    text-align: justify;
+}
+
+#new-page-comment-section-upload-button {
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    color: #c9c9c9;
+}
+
 .comment-section-username-p {
     font-size: smaller;
     font-weight: 900;
@@ -182,17 +193,6 @@ li {
     position: relative;
 }
 
-#upload-new-page-url-button {
-    width: 150px;
-    height: 30px;
-    border-radius: 5px;
-    background-color: black;
-    border: none;
-    outline: none;
-    color: #fff;
-    cursor: pointer;
-}
-
 #upload-new-page-title {
     background-color: rgb(50, 50, 50);
     color: #c9c9c9;
@@ -214,7 +214,6 @@ li {
 }
 
 #upload-new-page-link {
-    width: 450px;
     background-color: rgb(50, 50, 50);
     border: none;
     outline: none;
@@ -225,4 +224,17 @@ li {
     cursor: pointer;
     grid-template-columns: 15% 85%;
     position: relative;
+}
+
+.comment-created-at {
+    font-size: large;
+    font-weight: 600;
+}
+
+.profile-comment-div {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
 }
