@@ -10,7 +10,7 @@ html
       input#search-bar(type="text", placeholder="Search a new...")
       a#search-bar-search-button(href="") &#x1F50D
       if user && user.isLoggedIn
-        a(href="/profile")
+        a#top-bar-profile-avatar-a(href="/user/profile")
           img#top-bar-profile-avatar(src=user.avatar, alt="Avatar")
       a#dark-light-theme-button(href="") &#x1F315
 
@@ -42,25 +42,33 @@ html
     block content
       .profile-page
         .profile-card
-          img.profile-avatar(src=user.avatar alt="profile")
-          
-          h2.profile-name #{user.name} #{user.surname.substring(0,1)}.
+          img#profile-avatar(src=user.avatar alt="profile")
+          //-script.
+            const profileAvatar = document.getElementById("profile-avatar");
+            profileAvatar.addEventListener("mouseenter", () => {
+              text.style.display = "block";
+            });
+            profileAvatar.addEventListener("mouseleave", () => {
+              text.style.display = "none";
+            });          
 
-          if user.email
-            p.profile-email Email: #{user.email}
+          span#profile-username-span 
+            h2.profile-name #{user.name} #{user.surname} 
+            p 🖊️
 
-          if user.username
-            p.profile-username #{user.username}
+          span#profile-email-span 
+            p.profile-email #{user.email}
+            p 🖊️
 
-        .profile-comments
+
+        #profile-comments
           h2 Comments
           if comments.length === 0
             p No comments yet. 
           else
             each comment in comments
-              a(href=`api/news/${comment.newsId}`)
+              a#profile-comment-link(href="http://localhost:3000/news/" + comment.newsId)
                 div
                   .profile-comment-div
-                    span.comment-section-image-username-span
                     p.comment-section-comment-p #{comment.commentText}
                     p.comment-created-at Posted on: #{new Date(comment.createdAt).toLocaleString()} 

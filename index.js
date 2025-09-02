@@ -84,37 +84,37 @@ app.get("/login", function (req, res) {
 app.post("/api/login", async function (req, res) {
     const userDatabase = readUsersDB();
     const userIndex = userDatabase.findIndex(function (user) { return user.email === req.body.email });
-    if (userIndex !== -1) {
-        let user = userDatabase[userIndex];
-        const comparePassword = await bcrypt.compare(req.body.password, user.password)
-        if (!comparePassword) {
-            return res.send("Password is wrong!");
-        }
-        else {
-            user.isLoggedIn = true;
-            writeUsersDB(userDatabase);
-            req.session.user = {
-                id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, authenticationLevel: user.authenticationLevel,
-                postedNews: user.postedNews, comments: user.comments, isLoggedIn: true
-            };
-            req.session.save((err) => {
-                if (err) {
-                    return res.send("Session save error.");
-                }
-                return res.redirect("/");
-            });
-        }
-    }
-    else {
+    if (userIndex === -1) {
         return res.send("This account is not available.");
     }
+
+    let user = userDatabase[userIndex];
+    const comparePassword = await bcrypt.compare(req.body.password, user.password)
+
+    if (!comparePassword) {
+        return res.send("Password is wrong!");
+    }
+
+    user.isLoggedIn = true;
+    writeUsersDB(userDatabase);
+    req.session.user = {
+        id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, authenticationLevel: user.authenticationLevel,
+        postedNews: user.postedNews, comments: user.comments, isLoggedIn: true
+    };
+    req.session.save((err) => {
+        if (err) {
+            return res.send("Session save error.");
+        }
+        return res.redirect("/");
+    });
 })
+
 
 app.get("/upload", function (req, res) {
     res.render("upload-new-page", { user: req.session.user });
 })
 
-app.post("/api/upload-new", async function (req, res) {
+app.post("/api/upload-news", async function (req, res) {
     if (req.session.user && req.session.user.authenticationLevel >= 1) {
         const url = req.body.image;
         const response = await fetch(url);
@@ -134,18 +134,19 @@ app.post("/api/upload-new", async function (req, res) {
         writeNewsDB(newsDatabase);
         return res.redirect("/");
     }
-    else
-        return res.json({ message: "You need to login before upload any news." });
+    return res.json({ message: "You need to login before upload any news." });
 })
+
 
 app.post("/api/logout", function (req, res) {
     if (req.session.user) {
         const userDatabase = readUsersDB();
         const userIndex = userDatabase.findIndex(user => user.id === req.session.user.id);
-        if (userIndex !== -1) {
-            userDatabase[userIndex].isLoggedIn = false;
-            writeUsersDB(userDatabase);
+        if (userIndex === -1) {
+            return res.send("User not found.");
         }
+        userDatabase[userIndex].isLoggedIn = false;
+        writeUsersDB(userDatabase);
         req.session.destroy();
     }
     res.redirect("/");
@@ -153,26 +154,27 @@ app.post("/api/logout", function (req, res) {
 
 
 app.get("/api/currentUser", function (req, res) {
-    if (req.session.user !== undefined) {
-        const userDatabase = readUsersDB();
-        const user = userDatabase.find((user) => user.id === req.session.user.id);
-        if (user) {
-            return res.json({
-                id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, authenticationLevel: user.authenticationLevel,
-                comments: user.comments, postedNews: user.postedNews, isLoggedIn: user.isLoggedIn
-            });
-        }
+    if (req.session === undefined) {
         return res.json(null);
+    }
+    const userDatabase = readUsersDB();
+    const user = userDatabase.find((user) => user.id === req.session.user.id);
+    if (user) {
+        return res.json({
+            id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, authenticationLevel: user.authenticationLevel,
+            comments: user.comments, postedNews: user.postedNews, isLoggedIn: user.isLoggedIn
+        });
     }
     return res.json(null);
 })
 
-app.get("/api/news", async function (req, res) {
+
+app.get("/news", async function (req, res) {
     const newsDatabase = await readNewsDB();
     res.json(newsDatabase);
 });
 
-app.get("/api/news/:newsId", function (req, res) {
+app.get("/news/:newsId", function (req, res) {
     const newsDatabase = readNewsDB();
     const newsIndex = newsDatabase.findIndex((news) => news.newsId == req.params.newsId);
     if (newsIndex === -1) {
@@ -187,41 +189,36 @@ app.get("/api/news/:newsId", function (req, res) {
 
 app.post("/api/news/:newsId/addComment/", function (req, res) {
     const newsID = parseInt(req.params.newsId);
-    if (req.session.user && req.session.user.isLoggedIn) {
-        const newsDatabase = readNewsDB();
-        const usersDatabase = readUsersDB();
-        const newsIndex = newsDatabase.findIndex((news) => news.newsId === newsID);
-        const userIndex = usersDatabase.findIndex((user) => user.id === req.session.user.id);
-        if (newsIndex === -1) {
-            return res.status(404).json({ error: "News not found" });
-        }
-        if (userIndex === -1) {
-            return res.status(404).json({ error: "User not found" });
-        }
-        const newComment = {
-            commentId: uuidv4(),
-            commentText: String(req.body.commentText).trim(),
-            createdAt: new Date().toISOString(),
-            user: req.session.user,
-        };
-        newsDatabase[newsIndex].comments.push(newComment);
-        writeNewsDB(newsDatabase);
-        writeUsersDB(usersDatabase);
-        return res.redirect("/api/news/" + newsID);
-    }
-    else {
+    if (req.session.user === undefined || !req.session.user.isLoggedIn) {
         return res.render("login-page");
     }
+
+    const newsDatabase = readNewsDB();
+    const usersDatabase = readUsersDB();
+    const newsIndex = newsDatabase.findIndex((news) => news.newsId === newsID);
+    const userIndex = usersDatabase.findIndex((user) => user.id === req.session.user.id);
+    if (newsIndex === -1) {
+        return res.status(404).json({ error: "News not found" });
+    }
+    if (userIndex === -1) {
+        return res.status(404).json({ error: "User not found" });
+    }
+    const newComment = {
+        commentId: uuidv4(),
+        commentText: String(req.body.commentText).trim(),
+        createdAt: new Date().toISOString(),
+        user: req.session.user,
+    };
+    newsDatabase[newsIndex].comments.push(newComment);
+    writeNewsDB(newsDatabase);
+    writeUsersDB(usersDatabase);
+    return res.redirect("/api/news/" + newsID);
 });
 
 app.get("/user/profile", function (req, res) {
     const user = req.session.user;
     const newsDatabase = readNewsDB();
-    
-    // Yorumları toplamak için boş bir dizi oluşturun
     let allComments = [];
-
-    // Tüm haberleri ve yorumlarını gezerek kullanıcının yorumlarını toplayın
     newsDatabase.forEach((news) => {
         news.comments.forEach((comment) => {
             if (comment.user.id === user.id) {
@@ -233,8 +230,6 @@ app.get("/user/profile", function (req, res) {
             }
         });
     });
-
-    // Tüm yorumlar toplandıktan sonra sayfayı render edin
     return res.render("profile-page", { user: user, comments: allComments });
 });
 

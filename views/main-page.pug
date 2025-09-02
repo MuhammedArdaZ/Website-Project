@@ -9,8 +9,9 @@ html
         img#main-logo(src="/logo-revert.png", alt="HasHaber")
       input#search-bar(type="text", placeholder="Search a new...")
       a#search-bar-search-button(href="") &#x1F50D
+      p#main-page-welcome-text Welcome #{user ? user.name + " " + user.surname : 'Anonymous'}!
       if user && user.isLoggedIn
-        a(href="/user/profile")
+        a#top-bar-profile-avatar-a(href="/user/profile")
           img#top-bar-profile-avatar(src=user.avatar, alt="Avatar")
       a#dark-light-theme-button(href="") &#x1F315
 
@@ -48,7 +49,7 @@ html
       else
         if user.authenticationLevel >= 1
           form(action="/upload" method="get")
-            input#upload-new-button.page-login-register-upload-logout-button(type="submit", value="Upload New")
+            input#upload-new-button.page-login-register-upload-logout-button(type="submit", value="Upload News")
         form(action="/api/logout", method="post")
           input#logout-button.page-login-register-upload-logout-button(type="submit", value="Logout")
 
@@ -58,7 +59,7 @@ html
       .main-page-center-div
         ul#main-page-news-ul
           each newObject in news
-            a.main-page-news(href="/api/news/" + newObject.newsId)
+            a.main-page-news(href="/news/" + newObject.newsId)
               div
                 img.main-page-main-image(src= newObject.image , alt="Error")
                 h2.main-page-news-title #{newObject.title}
