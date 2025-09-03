@@ -1,12 +1,32 @@
 [
     {
         "id": "dde36131-6154-4b5b-a514-63a5f75a9b16",
-        "name": "Muhammed Arda",
+        "name": "Marda",
         "surname": "Zor",
         "email": "a@gmail.com",
         "password": "$2b$10$xALVbqAD/8LQ.PMJ29py8.BC95bJiF3duHmZyF/JuEMZyLHpgtzaG",
         "avatar": "/GuestAvatar.png",
         "authenticationLevel": 1,
+        "isLoggedIn": false
+    },
+    {
+        "id": "dde36131-6154-4b5b-a514-63a5f75a9b16",
+        "name": "Muhammed Arda",
+        "surname": "Zor",
+        "email": "b@gmail.com",
+        "password": "$2b$10$xALVbqAD/8LQ.PMJ29py8.BC95bJiF3duHmZyF/JuEMZyLHpgtzaG",
+        "avatar": "/GuestAvatar.png",
+        "authenticationLevel": 1,
         "isLoggedIn": true
+    },
+    {
+        "id": "f622631e-a9a3-47ad-828e-a378db1292a6",
+        "name": "Arda",
+        "surname": "Kılıcdagi",
+        "email": "arda@gmail.com",
+        "password": "$2b$10$y7Gh950bdRBDyT5.oo70femcbjN5ymnGsX4mp5mKmllzPRyWALKg.",
+        "avatar": "/GuestAvatar.png",
+        "authenticationLevel": 0,
+        "isLoggedIn": false
     }
 ]

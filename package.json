@@ -12,6 +12,7 @@
     "node-fetch": "^3.3.2",
     "pug": "^3.0.3",
     "request": "^2.88.2",
+    "session-file-store": "^1.5.0",
     "uuid": "^11.1.0"
   },
   "name": "website-project",

@@ -1,4 +1,3 @@
-doctype html
 html(lang="en")
   head
     meta
@@ -9,6 +8,11 @@ html(lang="en")
     #top-bar
       a(href="/")
         img#main-logo(src="/logo-revert.png", alt="HasHaber")
+      input#search-bar(type="text", placeholder="Search a new...")
+      a#search-bar-search-button(href="") &#x1F50D
+      if user && user.isLoggedIn
+        a#top-bar-profile-avatar-a(href="/user/profile")
+          img#top-bar-profile-avatar(src=user.avatar, alt="Avatar")
       a#dark-light-theme-button(href="") &#x1F315
 
       #date-clock-div

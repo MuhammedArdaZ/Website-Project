@@ -68,17 +68,58 @@ body {
     text-align: justify;
 }
 
-#new-page-comment-section-upload-button {
+#new-page-add-comment {
+    white-space: pre-wrap;
+}
+
+#new-page-comment-section-comment-button {
     background-color: rgb(50, 50, 50);
     border: none;
     outline: none;
     color: #c9c9c9;
+    cursor: pointer;
+}
+
+#new-page-comment-section-reply-button {
+    background-color: rgb(50, 50, 50);
+    border: none;
+    outline: none;
+    color: #c9c9c9;
+    cursor: pointer;
 }
 
 .comment-section-username-p {
-    font-size: smaller;
+    font-size: x-small;
     font-weight: 900;
 }
+
+.comment-section-created-at { 
+    font-size: x-small;
+    font-weight: 600;
+}
+
+.comment-section-reply-username-p {
+    font-size: x-small;
+    font-weight: 900;
+}
+
+.comment-section-reply-created-at { 
+    font-size: x-small;
+    font-weight: 600;
+}
+
+
+
+
+
+.comment-section-comment-p { 
+    white-space: pre;
+}
+
+
+
+
+
 
 .upload-new-page-li {
     list-style-type: none;
@@ -106,6 +147,12 @@ a:active {
 
 li {
     list-style-type: none;
+}
+
+#register-error-message{
+    color: red;
+    font-size: large;
+    display: none;
 }
 
 .register-login-upload-button {
@@ -236,7 +283,7 @@ li {
     position: relative;
 }
 
-.comment-created-at {
+.profile-comment-created-at {
     font-size: large;
     font-weight: 600;
 }
@@ -246,6 +293,6 @@ li {
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#profile-email-span{
+#profile-email-span {
     font-size: large;
 }

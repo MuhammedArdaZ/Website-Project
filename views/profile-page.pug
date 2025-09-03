@@ -39,36 +39,35 @@ html
         }
         setInterval(date_time, 1000);
 
-    block content
-      .profile-page
-        .profile-card
-          img#profile-avatar(src=user.avatar alt="profile")
-          //-script.
-            const profileAvatar = document.getElementById("profile-avatar");
+    .profile-page
+      .profile-card
+        img#profile-avatar(src=user.avatar alt="profile")
+        //-script.
+          const profileAvatar = document.getElementById("profile-avatar");
             profileAvatar.addEventListener("mouseenter", () => {
-              text.style.display = "block";
-            });
-            profileAvatar.addEventListener("mouseleave", () => {
-              text.style.display = "none";
-            });          
+            text.style.display = "block";
+          });
+          profileAvatar.addEventListener("mouseleave", () => {
+            text.style.display = "none";
+          });          
 
-          span#profile-username-span 
-            h2.profile-name #{user.name} #{user.surname} 
-            p 🖊️
+        span#profile-username-span 
+          h2.profile-name #{user.name} #{user.surname} 
+          p 🖊️
 
-          span#profile-email-span 
-            p.profile-email #{user.email}
-            p 🖊️
+        span#profile-email-span 
+          p.profile-email #{user.email}
+          p 🖊️
 
 
-        #profile-comments
-          h2 Comments
-          if comments.length === 0
-            p No comments yet. 
-          else
-            each comment in comments
-              a#profile-comment-link(href="http://localhost:3000/news/" + comment.newsId)
-                div
-                  .profile-comment-div
-                    p.comment-section-comment-p #{comment.commentText}
-                    p.comment-created-at Posted on: #{new Date(comment.createdAt).toLocaleString()} 
+      #profile-comments
+        h2 Comments
+        if comments.length === 0
+          p No comments yet. 
+        else
+          each comment in comments
+            a#profile-comment-link(href="http://localhost:3000/news/" + comment.newsId)
+              div
+                .profile-comment-div
+                  p#profile-comment-section-comment-p #{comment.commentText}
+                  p#profile-comment-created-at Posted on: #{new Date(comment.createdAt).toLocaleString()} 

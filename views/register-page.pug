@@ -8,6 +8,11 @@ html
     #top-bar
       a(href="/")
         img#main-logo(src="/logo-revert.png", alt="HasHaber")
+      input#search-bar(type="text", placeholder="Search a new...")
+      a#search-bar-search-button(href="") &#x1F50D
+      if user && user.isLoggedIn
+        a#top-bar-profile-avatar-a(href="/user/profile")
+          img#top-bar-profile-avatar(src=user.avatar, alt="Avatar")
       a#dark-light-theme-button(href="") &#x1F315
 
       #date-clock-div
@@ -16,8 +21,8 @@ html
 
       script.
         var clockSpan = document.getElementById("clock-span");
-        var dateSpan = document.getElementById("date-span")
-        date_time()
+        var dateSpan = document.getElementById("date-span");
+        date_time();
 
         function date_time() {
           var date = new Date();
@@ -35,42 +40,57 @@ html
         }
         setInterval(date_time, 1000);
 
-    form(action="/api/register", method="post")
+    form#register-form(action="/api/register", method="post")
       .register-login-upload
         ul
           li
-            input#name(
-              name="name"
-              type="text"
-              placeholder="Name"
-              required
-            )
-            input#surname(
-              name="surname"
-              type="text"
-              placeholder="Surname"
-              required
-            )
-            input#email(
-              name="email"
-              type="email"
-              placeholder="E-mail"
-              required
-            )
-            input#password(
-              name="password"
-              type="password"
-              placeholder="Password"
-              required
-            )
-            input#password-again(
-              name="passwordAgain"
-              type="password"
-              placeholder="Password Again"
-              required
-            )
+            input#name(name="name" type="text" placeholder="Name" required)
+            input#surname(name="surname" type="text" placeholder="Surname" required)
+            input#email(name="email" type="email" placeholder="E-mail" required)
+            input#password(name="password" type="password" placeholder="Password" required)
+            input#password-again(name="passwordAgain" type="password" placeholder="Password Again" required)
       .register-login-upload
-        input.register-login-upload-button(
-          type="submit"
-          value="Register"
-        )
+        input.register-login-upload-button(type="submit" value="Register")
+      span#register-error-message
+
+    script. 
+      const passwordInput = document.getElementById("password");
+      const passwordAgainInput = document.getElementById("password-again"); 
+      const name = document.getElementById("name");
+      const surname = document.getElementById("surname");
+      const errorMessage = document.getElementById("register-error-message");
+      const form = document.getElementById("register-form"); // Düzeltildi
+
+      function validatePasswords(){
+        const value = passwordInput.value;
+        const valueAgain = passwordAgainInput.value;
+        if (value.length < 5) {
+          errorMessage.innerHTML = "Password length must not be less than 5!";
+          errorMessage.style.display = "inline";
+          return false;
+        }
+        else if (value.includes(" ")){
+          errorMessage.innerHTML = "Password must not contain space character!";
+          errorMessage.style.display = "inline";
+          return false;
+        }
+        else if (value !== valueAgain){
+          errorMessage.innerHTML = "Passwords must match!";
+          errorMessage.style.display = "inline";
+          return false;
+        }
+        return true;
+      }
+
+      form.addEventListener("submit", (e) => {
+        if(!validatePasswords()){
+          e.preventDefault();
+        }
+      });
+
+      passwordInput.addEventListener("input", () => {
+        errorMessage.style.display = "none";
+      });
+      passwordAgainInput.addEventListener("input", () => {
+        errorMessage.style.display = "none";
+      });

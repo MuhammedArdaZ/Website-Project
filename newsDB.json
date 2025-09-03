@@ -3,79 +3,132 @@
         "newsId": 0,
         "title": "a",
         "content": "a",
-        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQToO6lVmDc8WIuD8lc8h6EOwomR-O5DfE3Yw&s",
         "comments": [],
         "views": 2,
         "createdAt": "2025-09-01T11:59:59.990Z",
-        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+        "authorId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     },
     {
         "newsId": 1,
         "title": "a",
         "content": "a",
-        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
-        "comments": [
-            {
-                "commentId": "f8dfde18-9117-48cd-a555-060e0bf2648a",
-                "commentText": "a",
-                "createdAt": "2025-09-01T12:09:21.623Z",
-                "user": {
-                    "id": "dde36131-6154-4b5b-a514-63a5f75a9b16",
-                    "email": "a@gmail.com",
-                    "name": "a",
-                    "surname": "a",
-                    "avatar": "/GuestAvatar.png",
-                    "authenticationLevel": 1,
-                    "isLoggedIn": true
-                }
-            },
-            {
-                "commentId": "0ed2ddc1-07e1-4b8a-ac10-7e139c0746a0",
-                "commentText": "kajbfajskfbasjkfbajkfbasjkfbajkfbasjkfbajkfbasjkfbajkfbasjkfbajkfbasjkfbajkfbasjkfbajkfbasjkfbajkfbasjkfbajkfbasjkfbajkfb",
-                "createdAt": "2025-09-01T12:27:05.550Z",
-                "user": {
-                    "id": "dde36131-6154-4b5b-a514-63a5f75a9b16",
-                    "email": "a@gmail.com",
-                    "name": "a",
-                    "surname": "a",
-                    "avatar": "/GuestAvatar.png",
-                    "authenticationLevel": 1,
-                    "isLoggedIn": true
-                }
-            }
-        ],
-        "views": 19,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQToO6lVmDc8WIuD8lc8h6EOwomR-O5DfE3Yw&s",
+        "comments": [],
+        "views": 21,
         "createdAt": "2025-09-01T12:01:07.222Z",
-        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+        "authorId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     },
     {
         "newsId": 2,
         "title": "b",
         "content": "b",
-        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
-        "comments": [],
-        "views": 5,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQToO6lVmDc8WIuD8lc8h6EOwomR-O5DfE3Yw&s",
+        "comments": [
+            {
+                "commentId": "1ddf7979-11dd-4be0-a398-86943a944cfc",
+                "commentText": "hjlıkjhlk",
+                "commentReply": [
+                    {
+                        "replyId": "4e844180-7511-4b8b-b7b7-45560adc0365",
+                        "replyText": "ıjuılkjk",
+                        "createdAt": "2025-09-03T11:32:57.176Z",
+                        "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+                    },
+                    {
+                        "replyId": "361de459-74a5-4417-b2e6-1c416659a84c",
+                        "replyText": "",
+                        "createdAt": "2025-09-03T11:33:06.054Z",
+                        "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+                    },
+                    {
+                        "replyId": "102b7ece-a00b-43bf-bcd5-5d32ce5c8df2",
+                        "replyText": "",
+                        "createdAt": "2025-09-03T11:33:08.104Z",
+                        "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+                    },
+                    {
+                        "replyId": "3dd07bbf-4211-4e38-adbe-6adbbc65902e",
+                        "replyText": "",
+                        "createdAt": "2025-09-03T11:33:09.904Z",
+                        "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+                    }
+                ],
+                "createdAt": "2025-09-03T11:32:50.403Z",
+                "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+            }
+        ],
+        "views": 24,
         "createdAt": "2025-09-01T12:01:26.880Z",
-        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+        "authorId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     },
     {
         "newsId": 3,
         "title": "c",
         "content": "c",
-        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
-        "comments": [],
-        "views": 9,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQToO6lVmDc8WIuD8lc8h6EOwomR-O5DfE3Yw&s",
+        "comments": [
+            {
+                "commentId": "0d6af218-afab-4ed2-80db-4d3d273c25a3",
+                "commentText": "Wow first",
+                "commentReply": [],
+                "createdAt": "2025-09-03T08:55:10.553Z",
+                "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+            }
+        ],
+        "views": 31,
         "createdAt": "2025-09-01T12:01:40.746Z",
-        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+        "authorId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     },
     {
         "newsId": 4,
         "title": "asdasd",
         "content": "asdasdsa",
-        "image": "https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg",
-        "comments": [],
-        "views": 7,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQToO6lVmDc8WIuD8lc8h6EOwomR-O5DfE3Yw&s",
+        "comments": [
+            {
+                "commentId": "0bb82186-0e97-484c-90d5-b43a1f4f1618",
+                "commentText": "first comment!",
+                "commentReply": [],
+                "createdAt": "2025-09-02T11:18:30.720Z",
+                "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+            },
+            {
+                "commentId": "d0845353-974a-4db9-b00f-6d4c5e2c4e42",
+                "commentText": "second comment!",
+                "commentReply": [],
+                "createdAt": "2025-09-02T13:12:10.399Z",
+                "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+            },
+            {
+                "commentId": "52961972-7d3d-481a-b981-67995de807b0",
+                "commentText": "Third comment 🎉",
+                "commentReply": [
+                    {
+                        "replyId": "b0a7dcad-229e-4dea-b80e-ea2405302647",
+                        "replyText": "Wow, you deserved a bronze medal!!!",
+                        "createdAt": "2025-09-03T08:24:17.523Z",
+                        "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+                    },
+                    {
+                        "replyId": "21ade56f-77aa-451f-b2e1-6d1914dc4234",
+                        "replyText": "CONGRATS!!",
+                        "createdAt": "2025-09-03T11:24:44.502Z",
+                        "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+                    },
+                    {
+                        "replyId": "1fac04e8-7e9c-458b-8215-8d4d452a1758",
+                        "replyText": "Bravo Arda!!!!",
+                        "createdAt": "2025-09-03T11:25:27.384Z",
+                        "userId": "f622631e-a9a3-47ad-828e-a378db1292a6"
+                    }
+                ],
+                "createdAt": "2025-09-03T08:22:13.856Z",
+                "userId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+            }
+        ],
+        "views": 202,
         "createdAt": "2025-09-01T12:24:23.977Z",
-        "author": "dde36131-6154-4b5b-a514-63a5f75a9b16"
+        "authorId": "dde36131-6154-4b5b-a514-63a5f75a9b16"
     }
 ]

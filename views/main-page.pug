@@ -9,7 +9,8 @@ html
         img#main-logo(src="/logo-revert.png", alt="HasHaber")
       input#search-bar(type="text", placeholder="Search a new...")
       a#search-bar-search-button(href="") &#x1F50D
-      p#main-page-welcome-text Welcome #{user ? user.name + " " + user.surname : 'Anonymous'}!
+      if isFirstLogin === true
+        p#main-page-welcome-text Welcome #{user.name} #{user.surname}!
       if user && user.isLoggedIn
         a#top-bar-profile-avatar-a(href="/user/profile")
           img#top-bar-profile-avatar(src=user.avatar, alt="Avatar")

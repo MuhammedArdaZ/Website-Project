@@ -13,7 +13,7 @@ p {
 }
 
 #search-bar {
-    margin-left: 10%;
+    margin-left: 15%;
     width: 40%;
     max-height: 20px;
     align-self: anchor-center;
@@ -24,10 +24,12 @@ p {
     justify-content: center;
     display: flex;
     margin-right: 1%;
+    margin-left: auto;
 }
 
 #main-page-welcome-text {
     margin-right: 2%;
+    display: flex;
     margin-left: auto;
 }
 
@@ -37,7 +39,7 @@ p {
     justify-content: space-evenly;
     flex-direction: column;
     display: flex;
-    margin: 20px;
+    margin-right: 2%;
 }
 
 #date-span {
@@ -118,6 +120,11 @@ p {
     margin: auto;
 }
 
+.comment-section-li {
+  border-top: 1px solid #ddd;
+  margin-top: 1%;
+}
+
 .new-page-news-div {
     flex-direction: column;
     margin: 20px auto;
@@ -140,18 +147,48 @@ p {
     margin-bottom: 12%;
 }
 
-#new-page-comment-section-upload-button {
-    width: fit-content;
+#new-page-comment-section-comment-button {
+    width: 10%;
     height: 25px;
     border: none;
     border-radius: 5px;
     font-weight: 600;
     margin-top: 5px;
-    margin-bottom: 5%;
-    margin-left: 62%;
+    margin-left: 60%;
 }
 
-#new-page-comment-section {
+#new-page-comment-section-reply-button {
+    width: 10%;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-left: 60%;
+}
+
+.comment-section-image-username-date-span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.comment-section-username-date-span {
+    flex-direction: column;
+    display: flex;
+}
+
+#new-page-add-comment {
+    width: 70%;
+    resize: none;
+    border: none;
+    background-color: whitesmoke;
+    height: fit-content;
+}
+
+#new-page-add-reply {
     width: 70%;
     resize: none;
     border: none;
@@ -160,15 +197,32 @@ p {
 }
 
 #new-page-comment-section-div {
-    width: 50%;
+    width: 60%;
+    resize: none;
+    border: none;
+    background-color: whitesmoke;
+    height: fit-content;
     margin-left: 1%;
 }
 
-.comment-section-image-username-span {
+.new-page-reply-div {
+    width: 60%;
+    resize: none;
+    border: none;
+    background-color: whitesmoke;
+    height: fit-content;
+    padding-left: 3%;
+}
+
+.comment-section-reply-image-username-date-span {
     align-items: center;
     flex-direction: row;
     display: flex;
-    gap: 5px;
+    gap: 10px;
+}
+
+.comment-section-reply-username-date-span {
+    flex-direction: column;
 }
 
 .upload-new-page-div {
@@ -285,4 +339,8 @@ ul {
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+form {
+    margin: 0px;
 }
