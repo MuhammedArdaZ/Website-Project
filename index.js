@@ -7,6 +7,7 @@ const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const fetch = require("node-fetch").default;
+const crypto = require('crypto');
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -24,6 +25,22 @@ app.use(session({
     }
 }));
 app.use(express.static("public"))
+app.use(async (req, res, next) => {
+    if (!req.session.user && req.cookies.rememberMe) {
+        const usersDatabase = await getUsersDB();
+        const user = usersDatabase.find(u => u.rememberToken === req.cookies.rememberMe);
+        if (user) {
+            req.session.user = {
+                id: user.id,
+                name: user.name,
+                surname: user.surname,
+                email: user.email,
+                isLoggedIn: true
+            }
+        }
+    }
+    next();
+});
 
 function getNewsDB() {
     return JSON.parse(fs.readFileSync(("newsDB.json")));
@@ -38,11 +55,33 @@ function pushUsersDB(data) {
     fs.writeFileSync("usersDB.json", JSON.stringify(data, null, 4));
 }
 
+// ------------------------- Cookie ------------------------- \\
+app.get("/set-cookie", (req, res) => {
+    res.cookie("rememberMe", "yes", {
+        maxAge: 1000 * 60 * 60 * 24, // 24 hour
+        httpOnly: true,
+        secure: false
+    });
+    res.send("Cookie has been set");
+});
+
+app.get("/get-cookie", (req, res) => {
+    const rememberMe = req.cookies.rememberMe;
+    res.send("Cookie: " + rememberMe);
+});
+
+app.get("/clear-cookie", (req, res) => {
+    res.clearCookie("rememberMe");
+    res.send("Cookie has been cleared");
+});
+
+
+// ------------------------- Main Page ------------------------- \\
 
 app.get("/", function (req, res) {
     let lastSixNews = getNewsDB().slice(-6).reverse();
     let isFirst = undefined;
-    if(req.session.user && req.session.user.isFirstLogin){
+    if (req.session.user && req.session.user.isFirstLogin) {
         isFirst = true
         req.session.user.isFirstLogin = false;
     }
@@ -53,6 +92,7 @@ app.get("/", function (req, res) {
     });
 })
 
+// ---------------------- Registiration ---------------------- \\
 app.get("/register", function (req, res) {
     res.render("register-page");
 })
@@ -78,11 +118,38 @@ app.post("/api/register", async function (req, res) {
             isLoggedIn: false
         }
         usersDatabase.push(newUser);
-        pushUsersDB(usersDatabase);
+        await pushUsersDB(usersDatabase);
+
+        const user = usersDatabase.find(user => user.email === req.body.email);
+
+        // Session
+        req.session.user = {
+            id: user.id,
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
+            isLoggedIn: true
+        }
+
+        // Token and Cookie
+        const token = crypto.randomBytes(64).toString('hex');
+        user.rememberToken = token;
+        req.session.save()
+
+        res.cookie("rememberMe", token, {
+            maxAge: 60 * 60 * 1000 * 24,// 24 hours    
+            httpOnly: true,
+            secure: false,
+            sameSite: 'lax'
+        });
+
+        await pushUsersDB(usersDatabase);
+
         return res.redirect("/");
     }
 })
 
+// -------------------------- Login -------------------------- \\
 app.get("/login", function (req, res) {
     res.render("login-page");
 })
@@ -111,10 +178,24 @@ app.post("/api/login", async function (req, res) {
         if (err) {
             return res.send("Session save error.");
         }
+
+        // Token and Cookie
+        const token = crypto.randomBytes(64).toString('hex');
+        user.rememberToken = token;
+        req.session.save()
+
+        res.cookie("rememberMe", token, {
+            maxAge: 60 * 60 * 1000 * 24,// 24 hours
+            httpOnly: true,
+            secure: false,
+            sameSite: 'lax'
+        });
+
         return res.redirect("/");
     });
 })
 
+// ------------------------- Upload News ------------------------- \\
 app.get("/upload", function (req, res) {
     res.render("upload-new-page", { user: req.session.user });
 })
@@ -141,7 +222,7 @@ app.post("/api/upload-news", async function (req, res) {
     return res.json({ message: "You need to login before upload any news." });
 })
 
-
+// ------------------------- Logout ------------------------- \\
 app.post("/api/logout", function (req, res) {
     if (req.session.user) {
         const userDatabase = getUsersDB();
@@ -153,10 +234,11 @@ app.post("/api/logout", function (req, res) {
         pushUsersDB(userDatabase);
         req.session.destroy();
     }
+    res.clearCookie("rememberMe");
     res.redirect("/");
 })
 
-
+// ------------------------- News & Comments ------------------------- \\
 app.get("/news", async function (req, res) {
     const newsDatabase = await getNewsDB();
     res.json(newsDatabase);
@@ -186,6 +268,7 @@ app.get("/news/:newsId", function (req, res) {
     return res.render("new-page", { newsData: newsData, user: req.session.user || undefined });
 });
 
+// Add a comment
 app.post("/api/news/:newsId/addComment/", function (req, res) {
     const newsID = parseInt(req.params.newsId);
     if (req.session.user === undefined || !req.session.user.isLoggedIn) {
@@ -215,6 +298,7 @@ app.post("/api/news/:newsId/addComment/", function (req, res) {
     return res.redirect("/news/" + newsID);
 });
 
+// Reply to a comment
 app.post("/api/news/:newsId/addCommentReply", function (req, res) {
     if (req.session.user === undefined || !req.session.user.isLoggedIn) {
         return res.render("login-page");
@@ -244,7 +328,7 @@ app.post("/api/news/:newsId/addCommentReply", function (req, res) {
     return res.redirect("/news/" + newsID);
 });
 
-
+// ------------------------- User Profile ------------------------- \\
 app.get("/user/profile", function (req, res) {
     const user = req.session.user;
     const newsDatabase = getNewsDB();
@@ -263,4 +347,5 @@ app.get("/user/profile", function (req, res) {
     return res.render("profile-page", { user: user, comments: allComments });
 });
 
+// ------------------------- Start Server ------------------------- \\
 app.listen(3000);

@@ -28,5 +28,16 @@
         "avatar": "/GuestAvatar.png",
         "authenticationLevel": 0,
         "isLoggedIn": false
+    },
+    {
+        "id": "3eacc071-f505-4fd9-8e7e-4a13609c82b7",
+        "name": "Enes Tuna",
+        "surname": "Çelik",
+        "email": "enestunacel@gmail.com",
+        "password": "$2b$10$HXV1cukYfg9tah0cPEBhieSneE11BtuTCbG4wHmY8MzJaZNrLd7cO",
+        "avatar": "/GuestAvatar.png",
+        "authenticationLevel": 0,
+        "isLoggedIn": false,
+        "rememberToken": "dc3523f6f26f65ac1aebb30eba7e9040731ed3eaca236a9c483287226c1e9243c16a2f5711f34bc468dbe5b7ac5d04ffb5ef79baa0d4f5fed4d1517286c56304"
     }
 ]

@@ -25,10 +25,9 @@
     align-items: center;
     justify-content: end;
     display: flex;
+    margin-left: auto;
     text-decoration: none;
-    color: black;
-    font-size: medium;
-    margin-right: 2%;
+    margin-right: 2%; 
 }
 
 .main-page-main-image{
