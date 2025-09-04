@@ -7,7 +7,7 @@
         "password": "$2b$10$xALVbqAD/8LQ.PMJ29py8.BC95bJiF3duHmZyF/JuEMZyLHpgtzaG",
         "avatar": "/GuestAvatar.png",
         "authenticationLevel": 1,
-        "isLoggedIn": false
+        "isLoggedIn": true
     },
     {
         "id": "dde36131-6154-4b5b-a514-63a5f75a9b16",

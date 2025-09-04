@@ -25,22 +25,22 @@ app.use(session({
 }));
 app.use(express.static("public"))
 
-function readNewsDB() {
+function getNewsDB() {
     return JSON.parse(fs.readFileSync(("newsDB.json")));
 }
-function writeNewsDB(data) {
+function pushNewsDB(data) {
     fs.writeFileSync("newsDB.json", JSON.stringify(data, null, 4));
 }
-function readUsersDB() {
+function getUsersDB() {
     return JSON.parse(fs.readFileSync(("usersDB.json")));
 }
-function writeUsersDB(data) {
+function pushUsersDB(data) {
     fs.writeFileSync("usersDB.json", JSON.stringify(data, null, 4));
 }
 
 
 app.get("/", function (req, res) {
-    let lastSixNews = readNewsDB().slice(-6).reverse();
+    let lastSixNews = getNewsDB().slice(-6).reverse();
     let isFirst = undefined;
     if(req.session.user && req.session.user.isFirstLogin){
         isFirst = true
@@ -58,7 +58,7 @@ app.get("/register", function (req, res) {
 })
 
 app.post("/api/register", async function (req, res) {
-    const usersDatabase = await readUsersDB();
+    const usersDatabase = await getUsersDB();
     if (usersDatabase.find((user) => user.email === req.body.email)) {
         res.json({ message: "This email has been taken." });
     }
@@ -78,7 +78,7 @@ app.post("/api/register", async function (req, res) {
             isLoggedIn: false
         }
         usersDatabase.push(newUser);
-        writeUsersDB(usersDatabase);
+        pushUsersDB(usersDatabase);
         return res.redirect("/");
     }
 })
@@ -88,7 +88,7 @@ app.get("/login", function (req, res) {
 })
 
 app.post("/api/login", async function (req, res) {
-    const userDatabase = readUsersDB();
+    const userDatabase = getUsersDB();
     const userIndex = userDatabase.findIndex(function (user) { return user.email === req.body.email });
     if (userIndex === -1) {
         return res.send("This account is not available.");
@@ -102,7 +102,7 @@ app.post("/api/login", async function (req, res) {
     }
 
     user.isLoggedIn = true;
-    writeUsersDB(userDatabase);
+    pushUsersDB(userDatabase);
     req.session.user = {
         id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, authenticationLevel: user.authenticationLevel,
         postedNews: user.postedNews, comments: user.comments, isLoggedIn: true, isFirstLogin: true
@@ -123,7 +123,7 @@ app.post("/api/upload-news", async function (req, res) {
     if (req.session.user && req.session.user.authenticationLevel >= 1) {
         const url = req.body.image;
 
-        let newsDatabase = await readNewsDB();
+        let newsDatabase = await getNewsDB();
         const uploadNewData = {
             newsId: newsDatabase[newsDatabase.length - 1].newsId + 1,
             title: req.body.title.trim(),
@@ -135,7 +135,7 @@ app.post("/api/upload-news", async function (req, res) {
             authorId: req.session.user.id
         }
         newsDatabase.push(uploadNewData);
-        writeNewsDB(newsDatabase);
+        pushNewsDB(newsDatabase);
         return res.redirect("/");
     }
     return res.json({ message: "You need to login before upload any news." });
@@ -144,13 +144,13 @@ app.post("/api/upload-news", async function (req, res) {
 
 app.post("/api/logout", function (req, res) {
     if (req.session.user) {
-        const userDatabase = readUsersDB();
+        const userDatabase = getUsersDB();
         const userIndex = userDatabase.findIndex(user => user.id === req.session.user.id);
         if (userIndex === -1) {
             return res.send("User not found.");
         }
         userDatabase[userIndex].isLoggedIn = false;
-        writeUsersDB(userDatabase);
+        pushUsersDB(userDatabase);
         req.session.destroy();
     }
     res.redirect("/");
@@ -158,21 +158,21 @@ app.post("/api/logout", function (req, res) {
 
 
 app.get("/news", async function (req, res) {
-    const newsDatabase = await readNewsDB();
+    const newsDatabase = await getNewsDB();
     res.json(newsDatabase);
 });
 
 app.get("/news/:newsId", function (req, res) {
-    const newsDatabase = readNewsDB();
+    const newsDatabase = getNewsDB();
     const newsIndex = newsDatabase.findIndex((news) => news.newsId == req.params.newsId);
     if (newsIndex === -1) {
         return res.status(404).json({ error: "News not found" });
     };
     newsDatabase[newsIndex].views += 1;
-    writeNewsDB(newsDatabase);
+    pushNewsDB(newsDatabase);
 
     const newsData = newsDatabase[newsIndex];
-    const userDatabase = readUsersDB();
+    const userDatabase = getUsersDB();
     newsData.comments = newsData.comments.map(comment => {
         const commentUser = userDatabase.find(commentU => commentU.id === comment.userId);
 
@@ -192,8 +192,8 @@ app.post("/api/news/:newsId/addComment/", function (req, res) {
         return res.render("login-page");
     }
 
-    const newsDatabase = readNewsDB();
-    const usersDatabase = readUsersDB();
+    const newsDatabase = getNewsDB();
+    const usersDatabase = getUsersDB();
     const newsIndex = newsDatabase.findIndex((news) => news.newsId === newsID);
     const userIndex = usersDatabase.findIndex((user) => user.id === req.session.user.id);
     if (newsIndex === -1) {
@@ -210,8 +210,8 @@ app.post("/api/news/:newsId/addComment/", function (req, res) {
         userId: req.session.user.id,
     };
     newsDatabase[newsIndex].comments.push(newComment);
-    writeNewsDB(newsDatabase);
-    writeUsersDB(usersDatabase);
+    pushNewsDB(newsDatabase);
+    pushUsersDB(usersDatabase);
     return res.redirect("/news/" + newsID);
 });
 
@@ -222,7 +222,7 @@ app.post("/api/news/:newsId/addCommentReply", function (req, res) {
     const newsID = parseInt(req.params.newsId);
     const commentId = req.body.commentId;
 
-    const newsDatabase = readNewsDB();
+    const newsDatabase = getNewsDB();
     const newsIndex = newsDatabase.findIndex((news) => news.newsId === newsID);
     if (newsIndex === -1) {
         return res.status(404).json({ error: "News not found" });
@@ -240,14 +240,14 @@ app.post("/api/news/:newsId/addCommentReply", function (req, res) {
         userId: req.session.user.id,
     };
     newsData.comments[commentIndex].commentReply.push(newReply);
-    writeNewsDB(newsDatabase);
+    pushNewsDB(newsDatabase);
     return res.redirect("/news/" + newsID);
 });
 
 
 app.get("/user/profile", function (req, res) {
     const user = req.session.user;
-    const newsDatabase = readNewsDB();
+    const newsDatabase = getNewsDB();
     let allComments = [];
     newsDatabase.forEach((news) => {
         news.comments.forEach((comment) => {

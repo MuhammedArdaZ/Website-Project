@@ -20,7 +20,7 @@ p {
     flex: none;
 }
 
-#top-bar-profile-avatar-a{
+#top-bar-profile-avatar-a {
     justify-content: center;
     display: flex;
     margin-right: 1%;
@@ -109,6 +109,12 @@ p {
     flex-direction: column;
 }
 
+#register-error-message {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
 .new-page-login-register-upload-div {
     justify-content: right;
     align-items: end;
@@ -121,8 +127,8 @@ p {
 }
 
 .comment-section-li {
-  border-top: 1px solid #ddd;
-  margin-top: 1%;
+    border-top: 1px solid #ddd;
+    margin-top: 1%;
 }
 
 .new-page-news-div {

@@ -41,23 +41,15 @@ html
 
     .profile-page
       .profile-card
-        img#profile-avatar(src=user.avatar alt="profile")
-        //-script.
-          const profileAvatar = document.getElementById("profile-avatar");
-            profileAvatar.addEventListener("mouseenter", () => {
-            text.style.display = "block";
-          });
-          profileAvatar.addEventListener("mouseleave", () => {
-            text.style.display = "none";
-          });          
+        img#profile-avatar(src=user.avatar alt="profile")       
 
         span#profile-username-span 
           h2.profile-name #{user.name} #{user.surname} 
-          p 🖊️
+          p#profile-edit-name 🖊️
 
         span#profile-email-span 
           p.profile-email #{user.email}
-          p 🖊️
+          p#profile-edit-email 🖊️
 
 
       #profile-comments
@@ -71,3 +63,12 @@ html
                 .profile-comment-div
                   p#profile-comment-section-comment-p #{comment.commentText}
                   p#profile-comment-created-at Posted on: #{new Date(comment.createdAt).toLocaleString()} 
+  
+
+    script. 
+      const nameBox = document.getElementById("profile-name")
+      const editName = document.getElementById("profile-edit-name");
+      const emailBox = document.getElementById("profile-email")
+      const editEmail = document.getElementById("profile-edit-Email");
+
+      editName.addEventListener("")
