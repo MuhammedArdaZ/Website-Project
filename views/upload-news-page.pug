@@ -43,8 +43,8 @@ html(lang="en")
     form(action="/api/upload-news", method="post")
       .upload-page-div
         ul
-          li.upload-new-page-li
-            input#upload-new-page-title(
+          li.upload-news-page-li
+            input#upload-news-page-title(
               name="title"
               type="text"
               placeholder="Title..."
@@ -52,7 +52,7 @@ html(lang="en")
               maxlength= "50"
               required
             )
-            textarea#upload-new-page-content(
+            textarea#upload-news-page-content(
               name="content"
               placeholder="Content..."
               cols="100"
@@ -60,7 +60,7 @@ html(lang="en")
               minlength= "1"
               required
             )
-            input#upload-new-page-link(
+            input#upload-news-page-link(
               name="image"
               type="url"
               placeholder="Image URL: 'https://...'"

@@ -52,17 +52,17 @@ html
         form(action="/api/logout", method="post")
           input#logout-button.page-login-register-upload-logout-button(type="submit", value="Logout")
 
-    div.new-page-news-div
+    div.news-page-news-div
       div
-        img.new-page-main-image(src= newsData.image, alt= "Error")
-        h2.new-page-news-title #{newsData.title}
-        p.new-page-news-content #{newsData.content}
+        img.news-page-main-image(src= newsData.image, alt= "Error")
+        h2.news-page-news-title #{newsData.title}
+        p.news-page-news-content #{newsData.content}
             
-    div#new-page-comment-section-div
+    div#news-page-comment-section-div
       p(style="font-weight: 900;") Comments
       form(action="/api/news/" + newsData.newsId + "/addComment/", method="post")
-        textarea#new-page-add-comment(placeholder="Write Comment Here...", name="commentText", rows="5", minlength="1", maxlength="300")
-        input#new-page-comment-section-comment-button(type="submit", value="Comment") 
+        textarea#news-page-add-comment(placeholder="Write Comment Here...", name="commentText", rows="5", minlength="1", maxlength="300")
+        input#news-page-comment-section-comment-button(type="submit", value="Comment") 
       ul
         each comment in newsData.comments
           li.comment-section-li
@@ -75,13 +75,13 @@ html
               p.comment-section-comment-p #{comment.commentText}
               form(action="/api/news/" + newsData.newsId + "/addCommentReply/", method="post")
                 input(type="hidden", name="commentId", value=comment.commentId)
-                textarea#new-page-add-reply(placeholder="Write Reply Here...", name="replyText", rows="3", minlength="1", maxlength="200")
-                input#new-page-comment-section-reply-button(type="submit", value="Reply") 
+                textarea#news-page-add-reply(placeholder="Write Reply Here...", name="replyText", rows="3", minlength="1", maxlength="200")
+                input#news-page-comment-section-reply-button(type="submit", value="Reply") 
 
               ul
                 each reply in comment.commentReply
                   li.comment-reply-li
-                    .new-page-reply-div
+                    .news-page-reply-div
                       span.comment-section-reply-image-username-date-span
                         img.comment-reply-avatar-image(src=reply.replyUser.avatar || '/GuestAvatar.png', alt="profile")
                         span.comment-section-username-date-span

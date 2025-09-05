@@ -1,12 +1,12 @@
-const express = require("express");
+import express from "express";
+import session from "express-session";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import fs from "fs";
+import { v4 as uuidv4 } from "uuid";
+import bcrypt from "bcrypt";
 const app = express();
-const session = require("express-session");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
-const bcrypt = require("bcrypt");
-const fetch = require("node-fetch").default;
+
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -40,7 +40,7 @@ function pushUsersDB(data) {
 
 
 app.get("/", function (req, res) {
-    let lastSixNews = getNewsDB().slice(-6).reverse();
+    const lastSixNews = getNewsDB().slice(-6).reverse();
     let isFirst = undefined;
     if(req.session.user && req.session.user.isFirstLogin){
         isFirst = true
@@ -104,8 +104,8 @@ app.post("/api/login", async function (req, res) {
     user.isLoggedIn = true;
     pushUsersDB(userDatabase);
     req.session.user = {
-        id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, authenticationLevel: user.authenticationLevel,
-        postedNews: user.postedNews, comments: user.comments, isLoggedIn: true, isFirstLogin: true
+        id: user.id, email: user.email, name: user.name, surname: user.surname, avatar: user.avatar, 
+        authenticationLevel: user.authenticationLevel, isLoggedIn: true, isFirstLogin: true
     };
     req.session.save((err) => {
         if (err) {
@@ -116,7 +116,7 @@ app.post("/api/login", async function (req, res) {
 })
 
 app.get("/upload", function (req, res) {
-    res.render("upload-new-page", { user: req.session.user });
+    res.render("upload-news-page", { user: req.session.user });
 })
 
 app.post("/api/upload-news", async function (req, res) {
@@ -183,18 +183,18 @@ app.get("/news/:newsId", function (req, res) {
 
         return { ...comment, commentAvatar: commentUser.avatar, commentName: commentUser.name, commentSurname: commentUser.surname };
     });
-    return res.render("new-page", { newsData: newsData, user: req.session.user || undefined });
+    return res.render("news-page", { newsData: newsData, user: req.session.user || undefined });
 });
 
 app.post("/api/news/:newsId/addComment/", function (req, res) {
-    const newsID = parseInt(req.params.newsId);
+    const newsId = parseInt(req.params.newsId);
     if (req.session.user === undefined || !req.session.user.isLoggedIn) {
         return res.render("login-page");
     }
 
     const newsDatabase = getNewsDB();
     const usersDatabase = getUsersDB();
-    const newsIndex = newsDatabase.findIndex((news) => news.newsId === newsID);
+    const newsIndex = newsDatabase.findIndex((news) => news.newsId === newsId);
     const userIndex = usersDatabase.findIndex((user) => user.id === req.session.user.id);
     if (newsIndex === -1) {
         return res.status(404).json({ error: "News not found" });
@@ -212,7 +212,7 @@ app.post("/api/news/:newsId/addComment/", function (req, res) {
     newsDatabase[newsIndex].comments.push(newComment);
     pushNewsDB(newsDatabase);
     pushUsersDB(usersDatabase);
-    return res.redirect("/news/" + newsID);
+    return res.redirect("/news/" + newsId);
 });
 
 app.post("/api/news/:newsId/addCommentReply", function (req, res) {
@@ -227,7 +227,7 @@ app.post("/api/news/:newsId/addCommentReply", function (req, res) {
     if (newsIndex === -1) {
         return res.status(404).json({ error: "News not found" });
     }
-    let newsData = newsDatabase[newsIndex]
+    const newsData = newsDatabase[newsIndex]
 
     const commentIndex = newsData.comments.findIndex((comment) => comment.commentId === commentId);
     if (commentIndex === -1) {
