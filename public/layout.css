@@ -115,7 +115,7 @@ p {
     align-self: center;
 }
 
-.new-page-login-register-upload-div {
+.news-page-login-register-upload-div {
     justify-content: right;
     align-items: end;
     display: flex;
@@ -131,7 +131,7 @@ p {
     margin-top: 1%;
 }
 
-.new-page-news-div {
+.news-page-news-div {
     flex-direction: column;
     margin: 20px auto;
     justify-content: flex-start;
@@ -140,20 +140,20 @@ p {
     display: flex;
 }
 
-.new-page-news-title {
+.news-page-news-title {
     vertical-align: top;
     margin: auto;
     overflow-wrap: break-word;
 }
 
-.new-page-news-content {
+.news-page-news-content {
     vertical-align: top;
     margin: auto;
     font-size: larger;
     margin-bottom: 12%;
 }
 
-#new-page-comment-section-comment-button {
+#news-page-comment-section-comment-button {
     width: 10%;
     height: 25px;
     border: none;
@@ -163,7 +163,7 @@ p {
     margin-left: 60%;
 }
 
-#new-page-comment-section-reply-button {
+#news-page-comment-section-reply-button {
     width: 10%;
     height: 25px;
     border: none;
@@ -186,7 +186,7 @@ p {
     display: flex;
 }
 
-#new-page-add-comment {
+#news-page-add-comment {
     width: 70%;
     resize: none;
     border: none;
@@ -194,7 +194,7 @@ p {
     height: fit-content;
 }
 
-#new-page-add-reply {
+#news-page-add-reply {
     width: 70%;
     resize: none;
     border: none;
@@ -202,7 +202,7 @@ p {
     height: fit-content;
 }
 
-#new-page-comment-section-div {
+#news-page-comment-section-div {
     width: 60%;
     resize: none;
     border: none;
@@ -211,7 +211,7 @@ p {
     margin-left: 1%;
 }
 
-.new-page-reply-div {
+.news-page-reply-div {
     width: 60%;
     resize: none;
     border: none;
@@ -231,13 +231,13 @@ p {
     flex-direction: column;
 }
 
-.upload-new-page-div {
+.upload-news-page-div {
     justify-content: center;
     align-items: center;
     display: flex;
 }
 
-.upload-new-page-li {
+.upload-news-page-li {
     margin-top: 10px;
     width: auto;
     justify-content: center;
@@ -246,7 +246,7 @@ p {
     flex-direction: column;
 }
 
-#upload-new-page-title {
+#upload-news-page-title {
     width: 40%;
     border: none;
     outline: none;
@@ -259,13 +259,13 @@ p {
     position: relative;
 }
 
-#upload-new-page-content {
+#upload-news-page-content {
     resize: none;
     width: 40%;
     height: 300px;
 }
 
-#upload-new-page-link {
+#upload-news-page-link {
     width: 40%;
 }
 

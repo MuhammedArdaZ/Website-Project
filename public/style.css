@@ -64,15 +64,15 @@ body {
     font-size: larger;
 }
 
-.new-page-news-content {
+.news-page-news-content {
     text-align: justify;
 }
 
-#new-page-add-comment {
+#news-page-add-comment {
     white-space: pre-wrap;
 }
 
-#new-page-comment-section-comment-button {
+#news-page-comment-section-comment-button {
     background-color: rgb(50, 50, 50);
     border: none;
     outline: none;
@@ -80,7 +80,7 @@ body {
     cursor: pointer;
 }
 
-#new-page-comment-section-reply-button {
+#news-page-comment-section-reply-button {
     background-color: rgb(50, 50, 50);
     border: none;
     outline: none;
@@ -121,19 +121,19 @@ body {
 
 
 
-.upload-new-page-li {
+.upload-news-page-li {
     list-style-type: none;
 }
 
-#upload-new-page-link {
+#upload-news-page-link {
     font-size: larger;
 }
 
-#upload-new-page-url-button {
+#upload-news-page-url-button {
     font-size: larger;
 }
 
-#upload-new-page-title {
+#upload-news-page-title {
     font-size: x-large;
 }
 
@@ -250,13 +250,13 @@ li {
     position: relative;
 }
 
-#upload-new-page-title {
+#upload-news-page-title {
     background-color: rgb(50, 50, 50);
     color: #c9c9c9;
     font-weight: 600;
 }
 
-#upload-new-page-content {
+#upload-news-page-content {
     background-color: rgb(50, 50, 50);
     border: none;
     outline: none;
@@ -270,7 +270,7 @@ li {
     position: relative;
 }
 
-#upload-new-page-link {
+#upload-news-page-link {
     background-color: rgb(50, 50, 50);
     border: none;
     outline: none;
