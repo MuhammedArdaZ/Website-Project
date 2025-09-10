@@ -8,4 +8,4 @@ const commentReplySchema = new mongoose.Schema({
 });
 
 const CommentReply = mongoose.model("CommentReply", commentReplySchema);
-export default CommentReply;
+export default commentReplySchema;

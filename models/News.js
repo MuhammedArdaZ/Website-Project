@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import commentSchema from "./models/Comment.js";
+import commentSchema from "./comment.js/"
 
 const newsSchema = new mongoose.Schema({
     newsId: { type: Number, required: true, unique: true },

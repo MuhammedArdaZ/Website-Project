@@ -1,5 +1,5 @@
 import mongoose, { mongo } from "mongoose";
-import commentReplySchema from "./models/CommentReply.js";
+import commentReplySchema from "./commentReply.js/";
 
 const commentSchema = new mongoose.Schema({
     commentId: { type: String, required: true },
@@ -9,5 +9,4 @@ const commentSchema = new mongoose.Schema({
     userId: { type: String, required: true }
 });
 
-const Comment = mongoose.model("Comment", commentSchema);
-export default Comment;
+export default commentSchema;
