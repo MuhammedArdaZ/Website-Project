@@ -1,7 +1,7 @@
 import User from "../models/userModel.js";
 import News from "../models/newsModel.js";
-import bcrypt from "bcrypt"; 
-import crypto from "crypto"; 
+import bcrypt from "bcrypt";
+import crypto from "crypto";
 import { v4 as uuidv4 } from "uuid";
 
 export async function findUserByRememberToken(rememberToken) {
@@ -23,12 +23,19 @@ export async function register(req, res) {
         return res.json({ message: "This email has been taken." });
     }
 
+    let nameArr = req.body.name.split(" ");
+    for (let i = 0; i < nameArr.length; i++) {
+        nameArr[i] = String(nameArr[i]).charAt(0).toUpperCase() + String(nameArr[i]).slice(1);
+    }
+    const name = nameArr.join(" ");
+    const surname = req.body.surname.charAt(0).toUpperCase() + req.body.surname.slice(1);
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const token = crypto.randomBytes(64).toString('hex');
     const newUser = new User({
         id: uuidv4(),
-        name: req.body.name,
-        surname: req.body.surname,
+        name: name,
+        surname: surname,
         email: req.body.email,
         password: hashedPassword,
         avatar: "/GuestAvatar.png",

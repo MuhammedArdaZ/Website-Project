@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // ------------------------- Main Page ------------------------- 
 export async function renderMain(req, res) {
-    const lastSixNews = await News.find({}).sort({ id: -1 }).limit(6);
+    const lastSixNews = (await News.find({}).sort({ id: -1 }).limit(6)).reverse();
     let isFirst = undefined;
     if (req.session.user && req.session.user.isFirstLogin) {
         isFirst = true
@@ -122,4 +122,3 @@ export async function postReply(req, res) {
     await news.save();
     return res.redirect("/news/" + newsId);
 };
-

@@ -64,7 +64,10 @@ html
               div
                 img.main-page-main-image(src= newObject.image , alt="Error")
                 h2.main-page-news-title #{newObject.title}
-                p.main-page-news-content #{newObject.content.substring(0, 50)}...
+                if(newObject.content.length > 50)
+                  p.main-page-news-content #{newObject.content.substring(0, 50)}...
+                else 
+                  p.main-page-news-content #{newObject.content}
 
       .main-page-right-side
       

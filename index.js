@@ -32,6 +32,7 @@ app.use(async (req, res, next) => {
                 name: user.name,
                 surname: user.surname,
                 email: user.email,
+                avatar: user.avatar,
                 isLoggedIn: true
             }
         }
