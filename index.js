@@ -5,15 +5,10 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
-
-
-import { findUserByRememberToken, renderRegister, register, renderLogin, login, logout, renderProfile } from "./services/user.js";
-import { renderMain, renderUpload, upload, renderNews, postComment, postReply } from "./services/news.js";
-
 const app = express();
 
-app.set("view engine", "pug");
-app.set("views", "./views");
+import { findUserByRememberToken, renderRegister, register, renderLogin, login, logout, renderProfile } from "./services/userService.js";
+import { renderMain, renderUpload, upload, renderNews, postComment, postReply } from "./services/pageService.js";
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -44,6 +39,23 @@ app.use(async (req, res, next) => {
     next();
 });
 
+app.set("view engine", "pug");
+app.set("views", "./views");
+
+app.get("/register", renderRegister);
+app.post("/api/register", register);
+app.get("/login", renderLogin);
+app.post("/api/login", login);
+app.post("/api/logout", logout);
+app.get("/user/profile", renderProfile);
+
+app.get("/", renderMain)
+app.get("/upload", renderUpload);
+app.post("/api/upload-news", upload);
+app.get("/news/:newsId", renderNews);
+app.post("/api/news/:newsId/addComment/", postComment);
+app.post("/api/news/:newsId/addCommentReply", postReply);
+
 
 // ------------------------- Cookie ------------------------- \\
 app.get("/set-cookie", (req, res) => {
@@ -65,21 +77,6 @@ app.get("/clear-cookie", (req, res) => {
     res.send("Cookie has been cleared");
 });
 
-app.get("/register", renderRegister());
-app.post("/api/register", register());
-app.get("/login", renderLogin());
-app.post("/api/login", login());
-app.get("/api/logout", logout());
-app.get("/user/profile", renderProfile());
-
-app.get("/", renderMain());
-app.get("/upload", renderUpload());
-app.post("/api/upload-news", upload());
-app.get("/news/:newsId", renderNews());
-app.post("/api/news/:newsId/addComment/", postComment());
-app.post("/api/news/:newsId/addCommentReply", postReply());
-
-
 // ------------------------- Start Server ------------------------- \\
 app.listen(process.env.PORT, async () => {
     await mongoose.connect(process.env.MONGO_CONNECT, {
@@ -88,4 +85,3 @@ app.listen(process.env.PORT, async () => {
     });
     console.log("Successfully connected to MongoDB");
 });
-

@@ -1,5 +1,8 @@
-import User from "../models/user.js/";
-import News from "../models/news.js/";
+import User from "../models/userModel.js";
+import News from "../models/newsModel.js";
+import bcrypt from "bcrypt"; 
+import crypto from "crypto"; 
+import { v4 as uuidv4 } from "uuid";
 
 export async function findUserByRememberToken(rememberToken) {
     if (!rememberToken) {
@@ -10,7 +13,7 @@ export async function findUserByRememberToken(rememberToken) {
 }
 
 // ---------------------- Registiration ---------------------- 
-function renderRegister(req, res) {
+export function renderRegister(req, res) {
     res.render("register-page");
 }
 
@@ -41,6 +44,7 @@ export async function register(req, res) {
         name: newUser.name,
         surname: newUser.surname,
         email: newUser.email,
+        avatar: newUser.avatar,
         isLoggedIn: true,
         isFirstLogin: true
     }
@@ -56,12 +60,12 @@ export async function register(req, res) {
 }
 
 // -------------------------- Login -------------------------- 
-function renderLogin(req, res) {
+export function renderLogin(req, res) {
     res.render("login-page");
 }
 
-async function login(req, res) {
-    const user = await User.findOne({ email: req.body.email }).lean();
+export async function login(req, res) {
+    const user = await User.findOne({ email: req.body.email });
     if (!user) {
         return res.send("This account is not available.");
     }
@@ -94,7 +98,7 @@ async function login(req, res) {
 }
 
 // ------------------------- Logout ------------------------- 
-async function logout(req, res) {
+export async function logout(req, res) {
     if (req.session.user) {
         await User.findOneAndUpdate(
             { email: req.session.user.email },

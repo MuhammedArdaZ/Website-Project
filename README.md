@@ -69,7 +69,7 @@ Once the containers are running, you can access the application by navigating to
 
 ```
 /website-project
-|-- Models/             # Mongoose data models (User, News)
+|-- models/             # Mongoose data models (User, News)
 |-- node_modules/       # Project dependencies
 |-- public/             # Static assets (CSS, images)
 |-- views/              # Pug template files

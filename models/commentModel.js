@@ -1,5 +1,5 @@
 import mongoose, { mongo } from "mongoose";
-import commentReplySchema from "./commentReply.js/";
+import commentReplySchema from "./commentReplyModel.js";
 
 const commentSchema = new mongoose.Schema({
     commentId: { type: String, required: true },

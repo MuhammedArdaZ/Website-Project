@@ -1,16 +1,16 @@
-import User from "../models/user.js/";
-import News from "../models/news.js/";
+import User from "../models/userModel.js";
+import News from "../models/newsModel.js";
+import { v4 as uuidv4 } from "uuid";
 
 // ------------------------- Main Page ------------------------- 
 export async function renderMain(req, res) {
-    console.log("user: " + req.session.user);
     const lastSixNews = await News.find({}).sort({ id: -1 }).limit(6);
     let isFirst = undefined;
     if (req.session.user && req.session.user.isFirstLogin) {
         isFirst = true
         req.session.user.isFirstLogin = false;
     }
-    res.render("main-page", {
+    await res.render("main-page", {
         news: lastSixNews,
         user: req.session.user !== undefined ? req.session.user : undefined,
         isFirstLogin: isFirst !== undefined ? isFirst : undefined
@@ -56,8 +56,7 @@ export async function renderNews(req, res) {
     };
 
     news.comments = await Promise.all(news.comments.map(async (comment) => {
-        const commentUser = await User.findOne({ id: comment.userId });
-        const commentObj = comment.toObject();
+        const commentUser = await User.findOne({ id: comment.userId }).lean();
 
         const processedReplies = await Promise.all(comment.commentReply.map(async (reply) => {
             const replyUser = await User.findOne({ id: reply.userId }).lean();
